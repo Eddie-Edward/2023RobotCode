@@ -7,20 +7,44 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
-  //test push to my branch #2
-  CANSparkMax m_neoMotor;
-  public Intake() {
+  private CANSparkMax m_neoMotor, m_neoMotor2;
+  private DoubleSolenoid twoBar;
+  private Joystick stick1;
+  public Intake(Joystick stick) {
     m_neoMotor = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+    m_neoMotor2 = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+    twoBar = new DoubleSolenoid(null, 0, 0);
+    stick1 = stick;
+  }
+  
+  public void stopIntake() {
+    m_neoMotor.set(0);
+    m_neoMotor2.set(0);
   }
 
-  @Override
-  public void periodic() {
-    
+  public void startIntake() {
+    m_neoMotor.set(stick1.getRawAxis(0));
+    m_neoMotor2.set(stick1.getRawAxis(0));
+  }
+
+  public void extendIntake(){
+    if(twoBar.get() != Value.kReverse) {
+      twoBar.set(Value.kReverse);
+    }
+  }
+
+  public void retractIntake(){
+    if(twoBar.get() != Value.kForward){
+      twoBar.set(Value.kForward);
+    }
   }
 }
