@@ -1,4 +1,4 @@
-package frc.robot.defaultconfigs;
+package frc.robot.CrevoLib.defaultconfigs;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
@@ -33,6 +33,7 @@ public class CTREConfigs {
         angleMotorConfig.slot0.kF = SwerveDrivetrainConstants.ANGLE_F;
         angleMotorConfig.supplyCurrLimit = angleMotorSupplyLimit;
         angleMotorConfig.initializationStrategy = SensorInitializationStrategy.BootToZero;
+        angleMotorConfig.slot0.allowableClosedloopError = SwerveDrivetrainConstants.ANGLE_ALLOWABLE_CL_ERROR;
 
         //Drive Motor Default Configs
         SupplyCurrentLimitConfiguration driveMotorSupplyLimit = new SupplyCurrentLimitConfiguration(

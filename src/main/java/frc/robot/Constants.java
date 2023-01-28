@@ -13,6 +13,8 @@ import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import frc.robot.CrevoLib.math.Conversions;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -24,6 +26,11 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
     public static final class SwerveDrivetrainConstants {
+
+        /*Swerve Drivetrain Construction */
+        public static final boolean FIELD_RELATIVE = true;
+        public static final boolean OPEN_LOOP = false;
+
         //Declaring CAN ID's for each module
         //Back Left -> Mod # 4
         //Back Right -> Mod # 1
@@ -140,7 +147,9 @@ public final class Constants {
         /*Open and Closed Loop Ramping*/
         public static final double OPEN_LOOP_RAMP = 0.25;
         public static final double CLOSED_LOOP_RAMP = 0.0;
-    }      
+
+        public static final double ANGLE_ALLOWABLE_CL_ERROR = Conversions.degreesToFalcon(0.5, ANGLE_GEAR_RATIO);
+    }
 
     public static final class LoggingConstants {
         public static final boolean tuningMode = false;
@@ -176,13 +185,17 @@ public final class Constants {
                     new Rotation3d(0, 0, 0));
         public static final Transform3d ROBOT_TO_CAM = CAM_TO_ROBOT.inverse();
         
-        public static final String CAMERA_NAME = "gloworm";
+        public static final String CAMERA_NAME = "OV5647";
 
     }
 
     public static final class FieldConstants{ 
         public static final double FIELD_LENGTH = Units.feetToMeters(54.2708333);
         public static final double FIELD_WIDTH = Units.feetToMeters(26.291667);
+    }
+
+    public static final class PoseEstimationConstants {
+        public static final Alliance CURRENT_ALLIANCE = Alliance.Red;
     }
 
     public static enum Mode {

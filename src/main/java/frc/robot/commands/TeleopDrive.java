@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.SwerveDrivetrainConstants;
+import frc.robot.CrevoLib.io.JoystickMods;
 import frc.robot.subsystems.SwerveDrivetrain;
 
 public class TeleopDrive extends CommandBase{
@@ -43,8 +44,14 @@ public class TeleopDrive extends CommandBase{
       xAxis = (Math.abs(xAxis) < JoystickConstants.STICK_DEADBAND) ? 0 : xAxis;
       rAxis = (Math.abs(rAxis) < JoystickConstants.STICK_DEADBAND) ? 0 : rAxis;
 
+      /*Softer Movement, Greater Accuracy, Interpolation Method */
+      yAxis = JoystickMods.interpolateJoystickAxis(yAxis, JoystickConstants.STICK_DEADBAND);
+      xAxis = JoystickMods.interpolateJoystickAxis(xAxis, JoystickConstants.STICK_DEADBAND);
+      rAxis = JoystickMods.interpolateJoystickAxis(rAxis, JoystickConstants.STICK_DEADBAND);
+
       m_translation = new Translation2d(yAxis, xAxis).times(SwerveDrivetrainConstants.MAX_SPEED);
       m_rotation = rAxis * SwerveDrivetrainConstants.MAX_ANGULAR_VELOCITY;
       m_swerveDrivetrain.drive(m_translation, m_rotation, m_fieldRelative, m_openLoop);
   }
+
 }
