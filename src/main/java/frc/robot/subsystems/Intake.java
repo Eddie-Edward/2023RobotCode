@@ -10,15 +10,24 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.commands.*;
+
+
 
 
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
+
   private CANSparkMax m_neoMotor, m_neoMotor2;
   private DoubleSolenoid twoBar;
   private Joystick stick1;
+  
+  
+
+
   public Intake(Joystick stick) {
     m_neoMotor = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
     m_neoMotor2 = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
@@ -47,4 +56,24 @@ public class Intake extends SubsystemBase {
       twoBar.set(Value.kForward);
     }
   }
+
+  public void getMotorCurrent(){
+  m_neoMotor = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+  m_neoMotor2 = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+  SmartDashboard.putNumber("Current from Motor 1:", m_neoMotor.getOutputCurrent());
+  SmartDashboard.putNumber("Current from Motor 2:", m_neoMotor2.getOutputCurrent());
+  }
+
+  public void setMotorCurrentLimit(int currentLimit, double targetVoltage){
+    m_neoMotor = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+    m_neoMotor2 = new CANSparkMax(Constants.IntakeConstants.INTAKE_NEO_ID, MotorType.kBrushless);
+    
+    m_neoMotor.setSmartCurrentLimit(currentLimit);
+    m_neoMotor2.setSmartCurrentLimit(currentLimit);
+
+    m_neoMotor.setVoltage(targetVoltage);
+    m_neoMotor2.setVoltage(targetVoltage);
+
+    }
 }
+
