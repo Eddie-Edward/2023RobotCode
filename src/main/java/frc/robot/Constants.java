@@ -223,6 +223,10 @@ public final class Constants {
     
     public static final class IntakeConstants {
         public static final int INTAKE_NEO_ID = 0;
+        public static final int CubeIntakeCurrentLimit = 0;
+        public static final double CubeIntakeTargetVoltage = 0.0;
+        public static final int ConeIntakeCurrentLimit = 0;
+        public static final double ConeIntakeTargetVoltage = 0.0;
     }
 
     public static final class ElevatorConstants {
