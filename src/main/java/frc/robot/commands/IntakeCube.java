@@ -4,41 +4,42 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
-public class IntakeCoCu extends CommandBase {
+public class IntakeCube extends CommandBase {
   /** Creates a new IntakeCoCu. */
 
-  private Intake IntakeCube, IntakeCone;
-  Joystick joy1;
+  private Intake IntakeCube;
+  XboxController joy1;
+  
 
-  public IntakeCoCu(Joystick joy) {
+  public IntakeCube(Intake intake, XboxController joy) {
     // Use addRequirements() here to declare subsystem dependencies.
+    IntakeCube = intake;
     joy1 = joy;
+    addRequirements(IntakeCube);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    IntakeCube = new Intake(joy1);
-    IntakeCone = new Intake(joy1);
+    
 
     IntakeCube.setMotorCurrentLimit(Constants.IntakeConstants.CubeIntakeCurrentLimit, Constants.IntakeConstants.CubeIntakeTargetVoltage);
-    IntakeCone.setMotorCurrentLimit(Constants.IntakeConstants.ConeIntakeCurrentLimit, Constants.IntakeConstants.ConeIntakeTargetVoltage);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    IntakeCone.startIntake();
     IntakeCube.startIntake();
   }
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    IntakeCone.stopIntake();
     IntakeCube.stopIntake();
   }
     
