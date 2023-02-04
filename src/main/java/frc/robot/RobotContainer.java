@@ -17,9 +17,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.JoystickConstants;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.Constants.VisionConstants;
+import frc.robot.commands.IntakeCone;
+import frc.robot.commands.IntakeCube;
 import frc.robot.commands.TeleopDrive;
+import frc.robot.commands.ToroIntakeCone;
+import frc.robot.commands.ToroIntakeCube;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PoseEstimator;
 import frc.robot.subsystems.SwerveDrivetrain;
+import frc.robot.subsystems.ToroIntake;
 
 
 public class RobotContainer {
@@ -29,10 +35,12 @@ public class RobotContainer {
   /*Declare Joystick*/
   private final XboxController m_driverController = new XboxController(JoystickConstants.DRIVER_PORT_ID);
   
+  
   /*Declare Subsystems*/
   private final SwerveDrivetrain m_swerveDrivetrain = new SwerveDrivetrain();
   private final PoseEstimator m_poseEstimator = new PoseEstimator(m_Limelight, m_swerveDrivetrain);
-
+  private final Intake m_intake = new Intake();
+  private final ToroIntake m_ToroIntake = new ToroIntake();
   /*Map Joystick Axis and Functions*/
   private final int m_translationAxis = XboxController.Axis.kLeftY.value;
   private final int m_strafeAxis = XboxController.Axis.kLeftX.value;
@@ -42,6 +50,14 @@ public class RobotContainer {
   /*Map Joystick Buttons and Functions*/
   private final JoystickButton m_zeroGyro = new JoystickButton(m_driverController, XboxController.Button.kY.value);
   private final JoystickButton m_resetRobotFieldPose = new JoystickButton(m_driverController, XboxController.Button.kA.value);
+  private final Trigger m_runConeIntake = new JoystickButton(m_driverController, XboxController.Axis.kRightTrigger.value);
+  private final Trigger m_runCubeIntake = new JoystickButton(m_driverController, XboxController.Axis.kLeftTrigger.value);
+
+  IntakeCube mIntakeCubeCommand = new IntakeCube(m_intake, m_driverController);
+  IntakeCone mIntakeConeCommand = new IntakeCone(m_intake, m_driverController);
+
+  ToroIntakeCube mToroIntakeCubeCommand = new ToroIntakeCube(m_ToroIntake, m_driverController);
+  ToroIntakeCone mToroIntakeConeCommand = new ToroIntakeCone(m_ToroIntake, m_driverController);
 
   public RobotContainer() {
     
@@ -63,6 +79,13 @@ public class RobotContainer {
    */
   private void configureBindings() {
     /*Define onPressed Commands for Joystick Buttons and Triggers*/
+
+      m_runConeIntake.whileTrue(mIntakeConeCommand);
+      m_runCubeIntake.whileTrue(mIntakeCubeCommand);
+
+      m_runConeIntake.whileTrue(mToroIntakeConeCommand);
+      m_runCubeIntake.whileTrue(mToroIntakeCubeCommand);
+
 
     m_zeroGyro.onTrue(
       new InstantCommand(() -> m_swerveDrivetrain.resetGyro()));
