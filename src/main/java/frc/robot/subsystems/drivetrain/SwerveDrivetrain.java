@@ -26,15 +26,19 @@ public class SwerveDrivetrain extends SubsystemBase {
     public Pigeon2 m_pigeonGyro;
     public DriveModes currDriveMode;
 
-    public SwerveModuleState[] setpointState = {
+    public SwerveModuleState[] setpointState = 
+    {
         new SwerveModuleState(0, Rotation2d.fromDegrees(0)),
         new SwerveModuleState(0, Rotation2d.fromDegrees(0)),
         new SwerveModuleState(0, Rotation2d.fromDegrees(0)),
-        new SwerveModuleState(0, Rotation2d.fromDegrees(0))};
+        new SwerveModuleState(0, Rotation2d.fromDegrees(0))
+    };
 
     
     public SwerveDrivetrain(){
         m_pigeonGyro = new Pigeon2(SwerveDrivetrainConstants.PIGEON_ID);
+        m_pigeonGyro.configFactoryDefault();
+        zeroGyro();
         // m_pigeonGyro.setYaw(0);
 
     
@@ -134,6 +138,11 @@ public class SwerveDrivetrain extends SubsystemBase {
         }
     }
 
+    public void antiSlip() {
+       
+    }
+
+
     public void setChassisSpeeds(ChassisSpeeds targetSpeeds) {
         setModuleStates(SwerveDrivetrainConstants.SWERVE_DRIVE_KINEMATICS.toSwerveModuleStates(targetSpeeds));
     }
@@ -190,16 +199,13 @@ public class SwerveDrivetrain extends SubsystemBase {
         }
     }
 
-    public void resetGyro() {
+
+    public void zeroGyro() {
         m_pigeonGyro.setYaw(0);
     }
 
-    public void zeroGyro(double reset) {
-        m_pigeonGyro.setYaw(reset);
-    }
-
     public void zeroModules() {
-        for(SwerveModule mod: m_swerveModules) {
+        for(var mod: m_swerveModules) {
             mod.zeroModule();
         }
     }
@@ -214,6 +220,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         } else {
             return Rotation2d.fromDegrees(m_pigeonGyro.getYaw());
         }
+    }
+
+    public Rotation2d getRoll() {
+        return Rotation2d.fromDegrees(m_pigeonGyro.getRoll());
     }
 
     public void resetOdometry(Pose2d pose) {
@@ -233,11 +243,16 @@ public class SwerveDrivetrain extends SubsystemBase {
         //UPDATE ODOMETRY
         m_swerveOdometry.update(getYaw(), getModulePositions());
 
+        for(SwerveModule mod : m_swerveModules){
+            SmartDashboard.putNumber("Mod " + mod.m_moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.m_moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
+            SmartDashboard.putNumber("Mod " + mod.m_moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
+        }
 
         //UPDATE LOGGER (PERIODIC) -> AdvantageScope Configuration
         Logger.getInstance().recordOutput("Odometry/RobotPose2d", m_swerveOdometry.getPoseMeters());
         Logger.getInstance().recordOutput("Odometry/RobotPose3d", new Pose3d(m_swerveOdometry.getPoseMeters()));
-        Logger.getInstance().recordOutput("Yaw/Robot", getAngle());
+        Logger.getInstance().recordOutput("Yaw/Robot", getNonContinuousGyro());
         
         
         Logger.getInstance().recordOutput("Drive/FLDrivePosition", m_swerveModules[0].getPosition().distanceMeters);
@@ -262,7 +277,6 @@ public class SwerveDrivetrain extends SubsystemBase {
        
         Logger.getInstance().recordOutput("Drive/RealStates", getStates());
         Logger.getInstance().recordOutput("Drive/SetpointStates", setpointState);
-        SmartDashboard.putNumber("Yaw", getAngle());
 
     }
 }

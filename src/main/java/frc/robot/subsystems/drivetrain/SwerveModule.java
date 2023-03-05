@@ -72,6 +72,8 @@ public class SwerveModule {
         m_lastAngle = angle;
     }
 
+    
+    
     public SwerveModuleState getState() {
         double velocity = Conversions.falconToMPS(m_driveMotor.getSelectedSensorVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO);
         Rotation2d angle = Rotation2d.fromDegrees(Conversions.falconToDegrees(m_angleMotor.getSelectedSensorPosition(), SwerveDrivetrainConstants.ANGLE_GEAR_RATIO));
@@ -127,9 +129,19 @@ public class SwerveModule {
 
     
 
-
     public void zeroModule() {
-        m_angleMotor.setSelectedSensorPosition(Conversions.degreesToFalcon(m_offset, SwerveDrivetrainConstants.ANGLE_GEAR_RATIO));
+        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - m_offset, -SwerveDrivetrainConstants.ANGLE_GEAR_RATIO);
+        m_angleMotor.setSelectedSensorPosition(absolutePosition);
+    }
+
+
+    public void moduleFortyFive() {
+        m_angleMotor.setSelectedSensorPosition(Conversions.degreesToFalcon(getCanCoder().getDegrees() - 45, -SwerveDrivetrainConstants.ANGLE_GEAR_RATIO));
+    }
+
+    public void moduleNegFortyFive() {
+        m_angleMotor.setSelectedSensorPosition(0);
+        m_angleMotor.setSelectedSensorPosition(Conversions.degreesToFalcon(getCanCoder().getDegrees() + 45, -SwerveDrivetrainConstants.ANGLE_GEAR_RATIO));
     }
 
     public double getDriveTemperature(){
