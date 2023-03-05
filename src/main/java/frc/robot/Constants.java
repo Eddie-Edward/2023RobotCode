@@ -37,33 +37,38 @@ public final class Constants {
         //Front Left -> Mod # 3
         //Front Right -> Mod # 2
         
-        public static final int FRONT_RIGHT_DRIVE_ID = 3;
-        public static final int FRONT_RIGHT_ANGLE_ID = 4;
-        public static final int FRONT_RIGHT_CANCODER_ID = 10;
+        public static final int FRONT_RIGHT_DRIVE_ID = 10;
+        public static final int FRONT_RIGHT_ANGLE_ID = 12;
+        public static final int FRONT_RIGHT_CANCODER_ID = 11;
 
         
-        public static final int FRONT_LEFT_DRIVE_ID = 5;
-        public static final int FRONT_LEFT_ANGLE_ID = 6;
-        public static final int FRONT_LEFT_CANCODER_ID = 11; 
+        public static final int FRONT_LEFT_DRIVE_ID = 1;
+        public static final int FRONT_LEFT_ANGLE_ID = 3;
+        public static final int FRONT_LEFT_CANCODER_ID = 2; 
 
         
-        public static final int BACK_LEFT_DRIVE_ID = 7;
-        public static final int BACK_LEFT_ANGLE_ID = 8;
-        public static final int BACK_LEFT_CANCODER_ID = 12;
+        public static final int BACK_LEFT_DRIVE_ID = 4;
+        public static final int BACK_LEFT_ANGLE_ID = 6;
+        public static final int BACK_LEFT_CANCODER_ID = 5;
 
         
-        public static final int BACK_RIGHT_DRIVE_ID = 1;
-        public static final int BACK_RIGHT_ANGLE_ID = 2;
-        public static final int BACK_RIGHT_CANCODER_ID = 9;
+        public static final int BACK_RIGHT_DRIVE_ID = 7;
+        public static final int BACK_RIGHT_ANGLE_ID = 9;
+        public static final int BACK_RIGHT_CANCODER_ID = 8;
 
         //Pigeon Constants
-        public static final int PIGEON_ID = 15;
+        public static final int PIGEON_ID = 13;
 
         /* Module CANCoder Offsets */
-        public static double FRONT_RIGHT_OFFSET = 207.42; 
-        public static double FRONT_LEFT_OFFSET = 176.66;
-        public static double BACK_LEFT_OFFSET = 99.75;
-        public static double BACK_RIGHT_OFFSET = 67.93;
+        public static double FRONT_LEFT_OFFSET = 176.66; // 176.30
+        public static double FRONT_RIGHT_OFFSET = 203.99; 
+        public static double BACK_LEFT_OFFSET = 100.98;
+        public static double BACK_RIGHT_OFFSET = 64.59;
+
+        // public static double FRONT_LEFT_OFFSET = 176.66;
+        // public static double FRONT_RIGHT_OFFSET = 207.42; 
+        // public static double BACK_LEFT_OFFSET = 99.75;
+        // public static double BACK_RIGHT_OFFSET = 67.93;
 
         /*Motor Invert Constants*/
         //Drive Motor Invert
@@ -88,22 +93,26 @@ public final class Constants {
         public static boolean PIGEON_INVERT = false;
 
         /*Drive Motor PID Values*/
-        public static final double DRIVE_P = 0.1;
+        public static final double DRIVE_P = 0.08;
         public static final double DRIVE_I = 0.0;
-        public static final double DRIVE_D = 0.0;
+        public static final double DRIVE_D = 0.1;
         public static final double DRIVE_F = 0.001;
 
         /*Angle Motor PID Values*/
-        public static final double ANGLE_P = 0.1;
+        public static final double ANGLE_P = 0.09;
         public static final double ANGLE_I = 0.0;
-        public static final double ANGLE_D = 0.0;
+        public static final double ANGLE_D = 0.1;
         public static final double ANGLE_F = 0.0;
 
         /*Drive Motor Characterization*/
         //Divide each by 12 to convert to volts for CTRE
-        public static final double DRIVE_kS = (0.63563 / 12);
-        public static final double DRIVE_kV = (0.31921 / 12);
-        public static final double DRIVE_kA = (0.034269 / 12);
+        // public static final double DRIVE_kS = (0.19943 / 12);
+        // public static final double DRIVE_kV = (0.10186 / 12);
+        // public static final double DRIVE_kA = (0.016307 / 12);
+
+        public static final double DRIVE_kS = (0.48665 / 12.0);
+        public static final double DRIVE_kV = (2.4132 / 12.0);
+        public static final double DRIVE_kA = (0.06921 / 12.0);
 
         /*Drive Motor Current Limiting*/
         public static final int DRIVE_CONTINUOUS_CURRENT_LIMIT = 35;
@@ -132,8 +141,8 @@ public final class Constants {
         public static final double MAX_ANGULAR_VELOCITY = Math.PI * 4.12;
 
         /*Swerve Kinematics Constants*/
-        public static final double DRIVETRAIN_WIDTH = Units.inchesToMeters(26.25);
-        public static final double DRIVETRAIN_LENGTH = Units.inchesToMeters(26.25);
+        public static final double DRIVETRAIN_WIDTH = Units.inchesToMeters(20.25);
+        public static final double DRIVETRAIN_LENGTH = Units.inchesToMeters(28.75);
         public static final double DRIVETRAIN_ACTUAL_LENGTH = Units.inchesToMeters(28.0);
         public static final double WHEEL_DIAMETER = Units.inchesToMeters(4.0);
         public static final double WHEEL_CIRCUMFERENCE = (WHEEL_DIAMETER  * Math.PI);
@@ -160,32 +169,34 @@ public final class Constants {
     }
 
     public static final class AutonConstants {
-        public static final double kMaxSpeedMetersPerSecond = 4.9;
+        public static final double kMaxSpeedMetersPerSecond = 4.0;
         public static final double kMaxAccelerationMetersPerSecondSquared = 3;
         public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
         public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.pow(kMaxAngularSpeedRadiansPerSecond, 2);
     
         public static final double kPXController = 5;
+        public static final double kDXController = 0.1;
         
-        public static final double kPYController = 5;
+        public static final double kPYController = 5;   
+        public static final double kDYController = 0.1;
     
-        public static final double kPThetaController = 0.15;
-        public static final double kDThetaController = -0.1;
+        public static final double kPThetaController = -2.78;
+        public static final double kDThetaController = 0.001;
     
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
-                kMaxAngularSpeedRadiansPerSecond, kMaxAngularSpeedRadiansPerSecondSquared);
+                8, 8);
       } 
     
     public static final Mode CUR_MODE = Mode.REAL;
     
     public static final class VisionConstants{
         public static final Transform3d CAM_TO_ROBOT = new Transform3d(
-                    new Translation3d(Units.inchesToMeters(-16), Units.inchesToMeters(-2.3), Units.inchesToMeters(24.75)),
+                    new Translation3d(Units.inchesToMeters(-11.5), Units.inchesToMeters(-2.0), Units.inchesToMeters(11.5)),
                     new Rotation3d(0, 0, 0));
         public static final Transform3d ROBOT_TO_CAM = CAM_TO_ROBOT.inverse();
         
-        public static final String CAMERA_NAME = "OV5647";
+        public static final String CAMERA_NAME = "Arducam";
 
     }
 
@@ -209,5 +220,10 @@ public final class Constants {
     
     public static final class IntakeConstants {
         public static final int INTAKE_NEO_ID = 0;
+    }
+
+    public static final class ElevatorConstants {
+        public static final int ELEVATOR_MOTOR_ID = 0;
+        public static final int ENCODER_CHANNEL = 0;
     }
 }
