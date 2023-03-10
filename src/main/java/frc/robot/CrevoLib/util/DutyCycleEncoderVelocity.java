@@ -6,7 +6,7 @@ import frc.robot.CrevoLib.util.loopController.Loop;
 import frc.robot.CrevoLib.util.loopController.Looper;
 
 public class DutyCycleEncoderVelocity extends DutyCycleEncoder implements Loop {
-    private final Timer m_timer = new Timer();
+  private final Timer m_timer = new Timer();
   private Looper looper = new Looper(0.01); // Update velocity @ 100hz
   private double lastPosition;
   private double lastTime;

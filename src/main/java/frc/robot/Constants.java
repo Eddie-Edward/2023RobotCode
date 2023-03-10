@@ -132,13 +132,12 @@ public final class Constants {
 
         /*Swerve Gear Ratios*/
         //From SDS Website
-        public static final double DRIVE_GEAR_RATIO = (6.75/1.0);
-        public static final double ANGLE_GEAR_RATIO = (-150.0/7);
+        public static final double DRIVE_GEAR_RATIO = (6.12/1.0);
+        public static final double ANGLE_GEAR_RATIO = ((-150.0/7)/1.0);
         
-
         /*Swerve Profiling Values*/
-        public static final double MAX_SPEED = (Units.feetToMeters(16.2)); //Max from SDS Limit Speed
-        public static final double MAX_ANGULAR_VELOCITY = Math.PI * 4.12;
+        public static final double MAX_SPEED = (Units.feetToMeters(18.0)); //Max from SDS Limit Speed
+        public static final double MAX_ANGULAR_VELOCITY = Math.PI * 4.12 * 0.5;
 
         /*Swerve Kinematics Constants*/
         public static final double DRIVETRAIN_WIDTH = Units.inchesToMeters(20.25);
@@ -187,6 +186,10 @@ public final class Constants {
             new TrapezoidProfile.Constraints(
                 8, 8);
       } 
+
+      public static final class OnTheFlyLineupConstants {
+        
+      }
     
     public static final Mode CUR_MODE = Mode.REAL;
     
