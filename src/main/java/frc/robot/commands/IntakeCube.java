@@ -28,14 +28,12 @@ public class IntakeCube extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    
-
-    IntakeCube.setMotorCurrentLimit(Constants.IntakeConstants.CubeIntakeCurrentLimit, Constants.IntakeConstants.CubeIntakeTargetVoltage);
+    IntakeCube.setWheelMotorCurrentLimit(Constants.IntakeConstants.CubeIntakeCurrentLimit, Constants.IntakeConstants.CubeIntakeTargetVoltage);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    IntakeCube.startIntake();
+    IntakeCube.startIntake(1);
   }
   // Called once the command ends or is interrupted.
   @Override

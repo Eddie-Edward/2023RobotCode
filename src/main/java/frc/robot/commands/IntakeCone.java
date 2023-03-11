@@ -24,12 +24,12 @@ public class IntakeCone extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    IntakeCone.setMotorCurrentLimit(Constants.IntakeConstants.ConeIntakeCurrentLimit, Constants.IntakeConstants.ConeIntakeTargetVoltage);
+    IntakeCone.setWheelMotorCurrentLimit(Constants.IntakeConstants.ConeIntakeCurrentLimit, Constants.IntakeConstants.ConeIntakeTargetVoltage);
   }
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    IntakeCone.startIntake();
+    IntakeCone.startIntake(1);
   }
   // Called once the command ends or is interrupted.
   @Override

@@ -222,23 +222,25 @@ public final class Constants {
     }
     
     public static final class IntakeConstants {
-        public static final int INTAKE_NEO_ID_1 = 21;
-        public static final int INTAKE_NEO_ID_2 = 22;
+        public static final int INTAKE_WHEEL_NEO_ID_1 = 21;
+        public static final int INTAKE__NEO_ID_2 = 22;
         public static final int CubeIntakeCurrentLimit = 0;
         public static final double CubeIntakeTargetVoltage = 0.0;
         public static final int ConeIntakeCurrentLimit = 0;
         public static final double ConeIntakeTargetVoltage = 0.0;
+        public static final int ToiletIntakeCurrentLimit = 0;
+        public static final double ToiletIntakeTargetVoltage = 0.0;
     }
 
     public static final class ToroIntakeConstants {
         public static final int INTAKE_NEO_ID_R1 = 24;
-        public static final int INTAKE_NEO_ID_R2 = 22;
-        public static final int INTAKE_NEO_ID_L1 = 23;
-        public static final int INTAKE_NEO_ID_L2 = 21;
-        public static final int CubeIntakeCurrentLimit = 0;
-        public static final double CubeIntakeTargetVoltage = 0.0;
-        public static final int ConeIntakeCurrentLimit = 0;
-        public static final double ConeIntakeTargetVoltage = 0.0;
+        // public static final int INTAKE_NEO_ID_R2 = 22;
+        // public static final int INTAKE_NEO_ID_L1 = 23;
+        // public static final int INTAKE_NEO_ID_L2 = 21;
+        // public static final int CubeIntakeCurrentLimit = 0;
+        // public static final double CubeIntakeTargetVoltage = 0.0;
+        // public static final int ConeIntakeCurrentLimit = 0;
+        // public static final double ConeIntakeTargetVoltage = 0.0;
     }
 
     public static final class ElevatorConstants {
