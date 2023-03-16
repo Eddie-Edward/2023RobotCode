@@ -7,13 +7,15 @@ import com.pathplanner.lib.commands.PPSwerveControllerCommand;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.commands.AntiSlip;
 import frc.robot.commands.AutoBalancing;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
+import frc.robot.drivetrain.SwerveDrivetrain;
 
 public class TestAuton extends SequentialCommandGroup {
     SwerveDrivetrain mSwerveDrivetrain;
@@ -21,6 +23,7 @@ public class TestAuton extends SequentialCommandGroup {
 
     AntiSlip antiSlip;
     AutoBalancing mAutoBalance;
+
     public TestAuton(SwerveDrivetrain drivetrain) {
         mSwerveDrivetrain = drivetrain;
 
@@ -48,7 +51,6 @@ public class TestAuton extends SequentialCommandGroup {
 
         addCommands(new InstantCommand(
             () -> mSwerveDrivetrain.resetOdometry(testAutonTraj.getInitialHolonomicPose())),
-            mAutonCommand, 
             mAutoBalance,
             antiSlip
         );

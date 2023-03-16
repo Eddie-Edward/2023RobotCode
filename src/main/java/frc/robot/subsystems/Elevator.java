@@ -6,7 +6,9 @@ package frc.robot.subsystems;
 
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
@@ -111,25 +113,25 @@ public class Elevator extends SubsystemBase {
     if((allE != allowedErr)) { m_pidController.setSmartMotionAllowedClosedLoopError(allE,0); allowedErr = allE; }
 
 
-    double setPoint, processVariable;
-    boolean mode = SmartDashboard.getBoolean("Mode", false);
-    if(mode) {
-      setPoint = SmartDashboard.getNumber("Set Velocity", 0);
-      m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
-      processVariable = mElevatorEncoderVelocity.getVelocity();
-    } else {
-      setPoint = SmartDashboard.getNumber("Set Position", 0);
-      /**
-       * As with other PID modes, Smart Motion is set by calling the
-       * setReference method on an existing pid object and setting
-       * the control type to kSmartMotion
-       */
-      m_pidController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
-      processVariable = mElevatorEncoder.getAbsolutePosition();
-    }
+    // double setPoint, processVariable;
+    // boolean mode = SmartDashboard.getBoolean("Mode", false);
+    // if(mode) {
+    //   setPoint = SmartDashboard.getNumber("Set Velocity", 0);
+    //   m_pidController.setReference(setPoint, CANSparkMax.ControlType.kVelocity);
+    //   processVariable = mElevatorEncoderVelocity.getVelocity();
+    // } else {
+    //   setPoint = SmartDashboard.getNumber("Set Position", 0);
+    //   /**
+    //    * As with other PID modes, Smart Motion is set by calling the
+    //    * setReference method on an existing pid object and setting
+    //    * the control type to kSmartMotion
+    //    */
+    //   m_pidController.setReference(setPoint, CANSparkMax.ControlType.kSmartMotion);
+    //   processVariable = mElevatorEncoder.getAbsolutePosition();
+     
     
-    SmartDashboard.putNumber("SetPoint", setPoint);
-    SmartDashboard.putNumber("Process Variable", processVariable);
-    SmartDashboard.putNumber("Output", mElevatorMotor.getAppliedOutput());
+    // SmartDashboard.putNumber("SetPoint", setPoint);
+    // SmartDashboard.putNumber("Process Variable", processVariable);
+    // SmartDashboard.putNumber("Output", mElevatorMotor.getAppliedOutput());
   }
 }

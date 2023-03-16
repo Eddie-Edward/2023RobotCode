@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import frc.robot.Constants.AutonConstants;
 import frc.robot.Constants.SwerveDrivetrainConstants;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
+import frc.robot.drivetrain.SwerveDrivetrain;
 
 public class TwoPieceOutsideBalance extends SequentialCommandGroup {
     SwerveDrivetrain mSwerveDrivetrain;

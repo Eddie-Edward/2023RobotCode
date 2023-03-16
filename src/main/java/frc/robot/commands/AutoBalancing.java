@@ -13,7 +13,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveDrivetrainConstants;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
+import frc.robot.drivetrain.SwerveDrivetrain;
 
 public class AutoBalancing extends CommandBase {
   /** Creates a new AutoBalancing. */

@@ -22,27 +22,30 @@ import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.Constants.VisionConstants;
 import frc.robot.commands.AutoBalancing;
 import frc.robot.commands.TeleopDrive;
+import frc.robot.commands.autos.AutonMaster;
 import frc.robot.commands.autos.OnePieceInside;
 import frc.robot.commands.autos.TestAuton;
 import frc.robot.commands.autos.TwoPieceInsideBalance;
 import frc.robot.commands.autos.TwoPieceOutsideBalance;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
-import frc.robot.subsystems.vision.PoseEstimator;
+import frc.robot.drivetrain.SwerveDrivetrain;
+import frc.robot.vision.PoseEstimator;
 
 
 public class RobotContainer {
 
   /*Declare External Sensors -> Cameras */
-  private final PhotonCamera m_OrangePI = new PhotonCamera(VisionConstants.CAMERA_NAME);
+  public final PhotonCamera m_OrangePI = new PhotonCamera(VisionConstants.CAMERA_NAME);
   /*Declare Joystick*/
-  private final XboxController m_driverController = new XboxController(JoystickConstants.DRIVER_PORT_ID);
+  public final XboxController m_driverController = new XboxController(JoystickConstants.DRIVER_PORT_ID);
   
   /*Declare Subsystems*/
-  private final SwerveDrivetrain m_swerveDrivetrain = new SwerveDrivetrain();
-  private final PoseEstimator m_poseEstimator = new PoseEstimator(m_OrangePI, m_swerveDrivetrain);
+  public static final SwerveDrivetrain m_swerveDrivetrain = new SwerveDrivetrain();
+  public final PoseEstimator m_poseEstimator = new PoseEstimator(m_OrangePI, m_swerveDrivetrain);
 
   /*Sendable Chooser Selector for Auton */
   private final SendableChooser<Command> mAutonChooser = new SendableChooser<>();
+
+  
   
   /*Declare Auton Commands */
   private final TwoPieceInsideBalance mTwoPieceInsideBalance = new TwoPieceInsideBalance(m_swerveDrivetrain);
@@ -50,6 +53,7 @@ public class RobotContainer {
   private final TestAuton mTestAuton = new TestAuton(m_swerveDrivetrain);
   private final OnePieceInside mOnePieceInside = new OnePieceInside(m_swerveDrivetrain);
   private final AutoBalancing mAutoBalancing = new AutoBalancing(m_swerveDrivetrain);
+  
   /*Map Joystick Axis and Functions*/
   private final int m_translationAxis = XboxController.Axis.kLeftY.value;
   private final int m_strafeAxis = XboxController.Axis.kLeftX.value;
@@ -61,6 +65,7 @@ public class RobotContainer {
   private final JoystickButton m_resetRobotFieldPose = new JoystickButton(m_driverController, XboxController.Button.kA.value);
   private final JoystickButton m_zeroModules = new JoystickButton(m_driverController, XboxController.Button.kB.value);
   private final JoystickButton m_autoBalance = new JoystickButton(m_driverController, XboxController.Button.kX.value);
+  
   public RobotContainer() {
     
     m_swerveDrivetrain.setDefaultCommand(new TeleopDrive(m_swerveDrivetrain, 
@@ -71,6 +76,7 @@ public class RobotContainer {
     mAutonChooser.addOption("TwoPieceOUTSIDEBalance", mTwoPieceOutsideBalance);
     mAutonChooser.addOption("TestAuton", mTestAuton);
     mAutonChooser.addOption("OnePieceInside", mOnePieceInside);
+    mAutonChooser.addOption("TestNewMethod", AutonMaster.testAuto());
     SmartDashboard.putData(mAutonChooser);
 
     configureBindings();

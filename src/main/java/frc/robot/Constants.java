@@ -5,6 +5,7 @@
 package frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.pathplanner.lib.auto.PIDConstants;
 
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Transform3d;
@@ -132,7 +133,7 @@ public final class Constants {
 
         /*Swerve Gear Ratios*/
         //From SDS Website
-        public static final double DRIVE_GEAR_RATIO = (6.12/1.0);
+        public static final double DRIVE_GEAR_RATIO = (6.75/1.0);
         public static final double ANGLE_GEAR_RATIO = ((-150.0/7)/1.0);
         
         /*Swerve Profiling Values*/
@@ -181,6 +182,9 @@ public final class Constants {
     
         public static final double kPThetaController = -2.78;
         public static final double kDThetaController = 0.001;
+
+        public static final PIDConstants AUTO_TRANSLATION_PID = new PIDConstants(kPXController, 0, kDXController);
+        public static final PIDConstants AUTO_ROTATION_PID = new PIDConstants(kPThetaController, 0, kDThetaController);
     
         public static final TrapezoidProfile.Constraints kThetaControllerConstraints =
             new TrapezoidProfile.Constraints(
@@ -188,7 +192,12 @@ public final class Constants {
       } 
 
       public static final class OnTheFlyLineupConstants {
-        
+        //taken through PathPlanner x/y positions
+        public static final double[] LINEUP_Y_POSITIONS = new double[] 
+        {4.97, 4.42, 3.85, 3.29, 2.75, 2.17, 1.62, 1.05, 0.51};
+        public static final double FINAL_BLUE_X_POSITION = 1.80;
+        public static final double FINAL_RED_X_POSITION = 14.75;
+
       }
     
     public static final Mode CUR_MODE = Mode.REAL;

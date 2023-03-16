@@ -8,7 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveDrivetrainConstants;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
+import frc.robot.drivetrain.SwerveDrivetrain;
 
 public class AntiSlip extends CommandBase {
   /** Creates a new AntiSlip. */
