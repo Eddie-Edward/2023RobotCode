@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.SpectrumLib.gamepads.Gamepad;
 import frc.robot.RobotContainer;
 import frc.robot.intake.commands.IntakeCommands;
-import frc.robot.intake.commands.RunIntakeManual;
+import frc.robot.intake.commands.   RunIntakeManual;
 
 public class DriverGamepad extends Gamepad {
     public DriverGamepad() {
