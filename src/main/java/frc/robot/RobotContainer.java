@@ -1,5 +1,7 @@
 package frc.robot;
 
+import org.photonvision.PhotonCamera;
+
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import frc.robot.driver.DriverGamepad;
 import frc.robot.intake.IntakePivot;
@@ -17,80 +19,47 @@ import frc.robot.commands.autos.OnePieceInside;
 import frc.robot.commands.autos.TestAuton;
 import frc.robot.commands.autos.TwoPieceInsideBalance;
 import frc.robot.commands.autos.TwoPieceOutsideBalance;
-import frc.robot.subsystems.drivetrain.SwerveDrivetrain;
-import frc.robot.subsystems.vision.PoseEstimator;
+import frc.robot.drivetrain.SwerveDrivetrain;
+import frc.robot.vision.PoseEstimator;
 
 
 public class RobotContainer {
 
-  /*Declare External Sensors -> Cameras */
-  private final PhotonCamera m_OrangePI = new PhotonCamera(VisionConstants.CAMERA_NAME);
-  /*Declare Joystick*/
-  private final XboxController m_driverController = new XboxController(JoystickConstants.DRIVER_PORT_ID);
-  
-  /*Declare Subsystems*/
-  private final SwerveDrivetrain m_swerveDrivetrain = new SwerveDrivetrain();
-  private final PoseEstimator m_poseEstimator = new PoseEstimator(m_OrangePI, m_swerveDrivetrain);
+  public static PhotonCamera orangePi = new PhotonCamera(Constants.VisionConstants.CAMERA_NAME);
 
-  /*Sendable Chooser Selector for Auton */
-  private final SendableChooser<Command> mAutonChooser = new SendableChooser<>();
-  
-  /*Declare Auton Commands */
-  private final TwoPieceInsideBalance mTwoPieceInsideBalance = new TwoPieceInsideBalance(m_swerveDrivetrain);
-  private final TwoPieceOutsideBalance mTwoPieceOutsideBalance = new TwoPieceOutsideBalance(m_swerveDrivetrain);
-  private final TestAuton mTestAuton = new TestAuton(m_swerveDrivetrain);
-  private final OnePieceInside mOnePieceInside = new OnePieceInside(m_swerveDrivetrain);
-  private final AutoBalancing mAutoBalancing = new AutoBalancing(m_swerveDrivetrain);
-  /*Map Joystick Axis and Functions*/
-  private final int m_translationAxis = XboxController.Axis.kLeftY.value;
-  private final int m_strafeAxis = XboxController.Axis.kLeftX.value;
-  private final int m_rotationAxis = XboxController.Axis.kRightX.value;
-  
+    /*Declare Joystick*/
+    public static XboxController driverControllerRetro = new XboxController(0);
+    public static DriverGamepad driverGamepad;
 
-  /*Map Joystick Buttons and Functions*/
-  private final JoystickButton m_zeroGyro = new JoystickButton(m_driverController, XboxController.Button.kY.value);
-  private final JoystickButton m_resetRobotFieldPose = new JoystickButton(m_driverController, XboxController.Button.kA.value);
-  private final JoystickButton m_zeroModules = new JoystickButton(m_driverController, XboxController.Button.kB.value);
-  private final JoystickButton m_autoBalance = new JoystickButton(m_driverController, XboxController.Button.kX.value);
-  public RobotContainer() {
-    
-    m_swerveDrivetrain.setDefaultCommand(new TeleopDrive(m_swerveDrivetrain, 
-      m_driverController, m_translationAxis, m_strafeAxis, m_rotationAxis, 
-      SwerveDrivetrainConstants.FIELD_RELATIVE, SwerveDrivetrainConstants.OPEN_LOOP));
+    /*Declare Subsystems*/
+    public static SwerveDrivetrain drivetrain;
+    public static PoseEstimator poseEstimator;
+    public static IntakePivot intakePivot;
+    public static IntakeRoller intakeRoller;
+    public static PneumaticsControlModule pcm;
 
-    mAutonChooser.setDefaultOption("TwoPieceINSIDEBalance", mTwoPieceInsideBalance);
-    mAutonChooser.addOption("TwoPieceOUTSIDEBalance", mTwoPieceOutsideBalance);
-    mAutonChooser.addOption("TestAuton", mTestAuton);
-    mAutonChooser.addOption("OnePieceInside", mOnePieceInside);
-    SmartDashboard.putData(mAutonChooser);
+    /*Sendable Chooser Selector for Auton */
+    public static SendableChooser<Command> autoChooser;
 
-    configureBindings();
-  }
+    public RobotContainer() {
+        // Subsystem initialization
+        drivetrain = new SwerveDrivetrain();
+        poseEstimator = new PoseEstimator(orangePi, drivetrain);
+        intakePivot = new IntakePivot();
+        intakeRoller = new IntakeRoller();
 
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for {@link
-   * CommandXboxController Xbox}/{@lin k edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
-  private void configureBindings() {
-    /*Define onPressed Commands for Joystick Buttons and Triggers*/
+        // Gamepad initialization
+        driverGamepad = new DriverGamepad();
 
-    m_zeroGyro.onTrue(
-      new InstantCommand(() -> m_swerveDrivetrain.zeroGyro()));
-      
-    m_resetRobotFieldPose.onTrue(
-      new InstantCommand(() -> m_poseEstimator.resetFieldPosition()));
+        drivetrain.setDefaultCommand(new TeleopDrive(drivetrain, driverControllerRetro,
+                XboxController.Axis.kLeftY.value, XboxController.Axis.kLeftX.value, XboxController.Axis.kRightX.value
+                , SwerveDrivetrainConstants.FIELD_RELATIVE, SwerveDrivetrainConstants.OPEN_LOOP));
 
-    m_zeroModules.onTrue( 
-      new InstantCommand(() -> m_swerveDrivetrain.zeroModules())
-    );
-    
-    m_autoBalance.whileTrue(mAutoBalancing);
-  }
+        autoChooser = getAutonChooser();
+        SmartDashboard.putData(autoChooser);
+
+        pcm = new PneumaticsControlModule();
+    }
 
     /**
      * Use this to pass the autonomous command to the main {@link Robot} class.
