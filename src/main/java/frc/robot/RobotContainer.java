@@ -7,19 +7,21 @@ import frc.robot.driver.DriverGamepad;
 import frc.robot.intake.IntakePivot;
 import frc.robot.intake.IntakeRoller;
 import frc.robot.intake.commands.HoldPivot;
-
+import frc.robot.operator.OperatorGamepad;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDrivetrainConstants;
-import frc.robot.commands.TeleopDrive;
-import frc.robot.commands.autos.AutonMaster;
-import frc.robot.commands.autos.OnePieceInside;
-import frc.robot.commands.autos.TestAuton;
-import frc.robot.commands.autos.TwoPieceInsideBalance;
-import frc.robot.commands.autos.TwoPieceOutsideBalance;
+import frc.robot.autos.AutonMaster;
+import frc.robot.autos.OnePieceInside;
+import frc.robot.autos.TestAuton;
+import frc.robot.autos.TwoPieceInsideBalance;
+import frc.robot.autos.TwoPieceOutsideBalance;
+import frc.robot.claw.Claw;
 import frc.robot.drivetrain.SwerveDrivetrain;
+import frc.robot.drivetrain.commands.TeleopDrive;
+import frc.robot.elevator.Elevator;
 import frc.robot.vision.PoseEstimator;
 
 
@@ -30,12 +32,15 @@ public class RobotContainer {
     /*Declare Joystick*/
     public static XboxController driverControllerRetro = new XboxController(0);
     public static DriverGamepad driverGamepad;
+    public static OperatorGamepad operatorGamepad;
 
     /*Declare Subsystems*/
     public static SwerveDrivetrain drivetrain;
     public static PoseEstimator poseEstimator;
     public static IntakePivot intakePivot;
     public static IntakeRoller intakeRoller;
+    public static Elevator elevator;
+    public static Claw claw;
     public static PneumaticsControlModule pcm;
 
     /*Sendable Chooser Selector for Auton */
@@ -47,9 +52,12 @@ public class RobotContainer {
         poseEstimator = new PoseEstimator(orangePi, drivetrain);
         intakePivot = new IntakePivot();
         intakeRoller = new IntakeRoller();
+        elevator = new Elevator();
+        claw = new Claw();
 
         // Gamepad initialization
         driverGamepad = new DriverGamepad();
+        operatorGamepad = new OperatorGamepad();
 
         drivetrain.setDefaultCommand(new TeleopDrive(drivetrain, driverControllerRetro,
                 XboxController.Axis.kLeftY.value, XboxController.Axis.kLeftX.value, XboxController.Axis.kRightX.value
@@ -68,7 +76,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return new TestAuton(drivetrain);
+        return getAutonChooser().getSelected();
     }
 
     private SendableChooser<Command> getAutonChooser() {
@@ -77,11 +85,13 @@ public class RobotContainer {
         chooser.addOption("TwoPieceOUTSIDEBalance", new TwoPieceOutsideBalance(drivetrain));
         chooser.addOption("TestAuton", new TestAuton(drivetrain));
         chooser.addOption("OnePieceInside", new OnePieceInside(drivetrain));
+        chooser.addOption("TestMarkerEvents", AutonMaster.testAutoBlue());
         return chooser;
     }
 
     public void reset() {
         driverGamepad.resetConfig();
+        operatorGamepad.resetConfig();
     }
 
     private void setDefaultCommands() {
