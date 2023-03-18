@@ -15,14 +15,10 @@ public class IntakeCommands {
 
     @Deprecated
     public static Command setPivotOutput(DoubleSupplier supplier) {
-        return new InstantCommand(() -> RobotContainer.intakePivot.setPivotOutput(supplier.getAsDouble()), RobotContainer.intakePivot);
+        return new InstantCommand(() -> RobotContainer.intakePivot.set(supplier.getAsDouble()), RobotContainer.intakePivot);
     }
 
     public static Command setHoodState(IntakeConfig.HoodState state) {
-        return new InstantCommand(() -> RobotContainer.intakePivot.setHoodState(state), RobotContainer.intakePivot);
-    }
-
-    public static Command toggleHoodState() {
-        return new InstantCommand(() -> RobotContainer.intakePivot.toggleHoodState(), RobotContainer.intakePivot);
+        return new InstantCommand(() -> RobotContainer.intakeHood.setState(state));
     }
 }

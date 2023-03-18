@@ -11,22 +11,12 @@ import frc.robot.CrevoLib.math.Conversions;
 public class IntakePivot extends SubsystemBase {
     private final CANSparkMax spark;
     private final SparkMaxAbsoluteEncoder encoder;
-    private final DoubleSolenoid hoodSolenoid;
 
     private IntakeConfig.HoodState hoodState;
 
     public IntakePivot() {
         spark = new CANSparkMax(IntakeConfig.kPivotSparkID, CANSparkMaxLowLevel.MotorType.kBrushless);
         encoder = spark.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle);
-        hoodSolenoid = new DoubleSolenoid(
-                PneumaticsModuleType.CTREPCM,
-                IntakeConfig.kHoodForwardChannel,
-                IntakeConfig.kHoodReverseChannel
-        );
-
-        spark.setIdleMode(CANSparkMax.IdleMode.kCoast);
-
-        hoodState = IntakeConfig.HoodState.kClosed;
 
         configureMotor();
         configureSensors();
@@ -34,6 +24,8 @@ public class IntakePivot extends SubsystemBase {
 
     private void configureMotor() {
         spark.setInverted(IntakeConfig.kPivotMotorInverted);
+        spark.setSmartCurrentLimit(40, 40);
+        spark.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
     private void configureSensors() {
@@ -45,7 +37,8 @@ public class IntakePivot extends SubsystemBase {
      * @return position in radians
      */
     public double getAngleRads() {
-        return Conversions.rotationToRadians(encoder.getPosition());
+        final var angle = Conversions.rotationToRadians(encoder.getPosition());
+        return (angle >= 6) ? 0 : angle;
     }
 
     /**
@@ -55,34 +48,19 @@ public class IntakePivot extends SubsystemBase {
         return Conversions.rotationToRadians(encoder.getVelocity());
     }
 
+    public double getOutputCurrent() {
+        return Math.abs(spark.getOutputCurrent());
+    }
+
     /**
-     * Sets the percent output of the pivot motor
-     *
-     * @param output [-1 - 1]
+     * Sets the output of the pivot motor (range -1 to 1)
+     * @param output output
      */
-    public void setPivotOutput(double output) {
+    public void set(double output) {
         spark.set(output);
     }
 
     public void stop() {
         spark.set(0);
-    }
-
-    public void setHoodState(IntakeConfig.HoodState state) {
-        hoodState = state;
-        hoodSolenoid.set(state.state);
-    }
-
-    public void toggleHoodState() {
-        switch (hoodState) {
-            case kOpen:
-                hoodState = IntakeConfig.HoodState.kClosed;
-                break;
-            case kClosed:
-                hoodState = IntakeConfig.HoodState.kOpen;
-                break;
-        }
-
-        hoodSolenoid.set(hoodState.state);
     }
 }

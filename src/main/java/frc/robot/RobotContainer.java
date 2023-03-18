@@ -1,5 +1,6 @@
 package frc.robot;
 
+import frc.robot.intake.IntakeHood;
 import org.photonvision.PhotonCamera;
 
 import edu.wpi.first.wpilibj.PneumaticsControlModule;
@@ -27,7 +28,7 @@ import frc.robot.vision.PoseEstimator;
 
 public class RobotContainer {
 
-  public static PhotonCamera orangePi = new PhotonCamera(Constants.VisionConstants.CAMERA_NAME);
+//  public static PhotonCamera orangePi = new PhotonCamera(Constants.VisionConstants.CAMERA_NAME);
 
     /*Declare Joystick*/
     public static XboxController driverControllerRetro = new XboxController(0);
@@ -36,9 +37,10 @@ public class RobotContainer {
 
     /*Declare Subsystems*/
     public static SwerveDrivetrain drivetrain;
-    public static PoseEstimator poseEstimator;
+//    public static PoseEstimator poseEstimator;
     public static IntakePivot intakePivot;
     public static IntakeRoller intakeRoller;
+    public static IntakeHood intakeHood;
     public static Elevator elevator;
     public static Claw claw;
     public static PneumaticsControlModule pcm;
@@ -49,7 +51,7 @@ public class RobotContainer {
     public RobotContainer() {
         // Subsystem initialization
         drivetrain = new SwerveDrivetrain();
-        poseEstimator = new PoseEstimator(orangePi, drivetrain);
+//        poseEstimator = new PoseEstimator(orangePi, drivetrain);
         intakePivot = new IntakePivot();
         intakeRoller = new IntakeRoller();
         elevator = new Elevator();
@@ -63,10 +65,11 @@ public class RobotContainer {
                 XboxController.Axis.kLeftY.value, XboxController.Axis.kLeftX.value, XboxController.Axis.kRightX.value
                 , SwerveDrivetrainConstants.FIELD_RELATIVE, SwerveDrivetrainConstants.OPEN_LOOP));
 
-        autoChooser = getAutonChooser();
-        SmartDashboard.putData(autoChooser);
+//        autoChooser = getAutonChooser();
+//        SmartDashboard.putData(autoChooser);
 
         pcm = new PneumaticsControlModule();
+        pcm.enableCompressorDigital();
     }
 
     /**
