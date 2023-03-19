@@ -20,6 +20,7 @@ import frc.robot.autos.TestAuton;
 import frc.robot.autos.TwoPieceInsideBalance;
 import frc.robot.autos.TwoPieceOutsideBalance;
 import frc.robot.claw.Claw;
+import frc.robot.claw.ClawConfig.ClawState;
 import frc.robot.drivetrain.SwerveDrivetrain;
 import frc.robot.drivetrain.commands.TeleopDrive;
 import frc.robot.elevator.Elevator;
@@ -58,6 +59,8 @@ public class RobotContainer {
         elevator = new Elevator();
         claw = new Claw();
 
+    
+
         // Gamepad initialization
         driverGamepad = new DriverGamepad();
         operatorGamepad = new OperatorGamepad();
@@ -69,7 +72,8 @@ public class RobotContainer {
 //        autoChooser = getAutonChooser();
 //        SmartDashboard.putData(autoChooser);
 
-        setDefaultCommands();
+        pcm = new PneumaticsControlModule();
+        pcm.enableCompressorDigital();
     }
 
     /**
