@@ -15,10 +15,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.autos.AutonMaster;
-import frc.robot.autos.OnePieceInside;
-import frc.robot.autos.TestAuton;
-import frc.robot.autos.TwoPieceInsideBalance;
-import frc.robot.autos.TwoPieceOutsideBalance;
 import frc.robot.claw.Claw;
 import frc.robot.claw.ClawConfig.ClawState;
 import frc.robot.drivetrain.SwerveDrivetrain;
@@ -86,11 +82,7 @@ public class RobotContainer {
 
     private SendableChooser<Command> getAutonChooser() {
         SendableChooser<Command> chooser = new SendableChooser<>();
-        chooser.setDefaultOption("TwoPieceINSIDEBalance", new TwoPieceInsideBalance(drivetrain));
-        chooser.addOption("TwoPieceOUTSIDEBalance", new TwoPieceOutsideBalance(drivetrain));
-        chooser.addOption("TestAuton", new TestAuton(drivetrain));
-        chooser.addOption("OnePieceInside", new OnePieceInside(drivetrain));
-        chooser.addOption("TestMarkerEvents", AutonMaster.testAutoBlue());
+        chooser.setDefaultOption("TestMarkerEvents", AutonMaster.testAutoBlue());
         return chooser;
     }
 

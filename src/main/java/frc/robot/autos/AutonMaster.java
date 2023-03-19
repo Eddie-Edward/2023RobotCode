@@ -22,6 +22,7 @@ import frc.robot.intake.IntakeConfig.PivotState;
 import frc.robot.intake.commands.IntakeCommands;
 import frc.robot.intake.commands.RunIntake;
 import frc.robot.intake.commands.SetPivotState;
+import frc.robot.autos.AutoBalancing;
 
 public final class AutonMaster {
     
@@ -29,7 +30,9 @@ public final class AutonMaster {
         Map.entry("Stop", new InstantCommand(RobotContainer.drivetrain::stopSwerve)),
         Map.entry("ZeroGyro", new InstantCommand(() -> RobotContainer.drivetrain.m_pigeonGyro.setYaw(RobotContainer.drivetrain.getYaw().getDegrees()))),
         Map.entry("IntakeDown", new ParallelCommandGroup(new SetPivotState(RobotContainer.intakePivot, PivotState.kDeployed), new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kCube))),
-        Map.entry("IntakeUp", new SetPivotState(RobotContainer.intakePivot, PivotState.kHumanPlayer))
+        Map.entry("IntakeUp", new SetPivotState(RobotContainer.intakePivot, PivotState.kHumanPlayer)),
+        Map.entry("AutoBalance", new AutoBalancing(RobotContainer.drivetrain)),
+        Map.entry("AntiSlip", new AntiSlip(RobotContainer.drivetrain))
     ));
 
     private static final SwerveAutoBuilder m_autoBuilder = new SwerveAutoBuilder(
@@ -42,9 +45,7 @@ public final class AutonMaster {
         false, 
         RobotContainer.drivetrain);
 
-    public static Command testAuto() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("Test", new PathConstraints(4, 3)));
-    }
+
 
     public static Command testAutoBlue() {
         return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestBlueEventMap", new PathConstraints(4, 3)));

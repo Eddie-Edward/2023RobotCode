@@ -6,6 +6,7 @@ package frc.robot.claw;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.claw.ClawConfig.ClawState;
 import frc.robot.intake.IntakeConfig.HoodState;
@@ -29,17 +30,21 @@ public class Claw extends SubsystemBase {
   }
 
     public void toggleClawState() {
-        switch (clawState) {
-            case kOpen:
-                clawState = ClawConfig.ClawState.kClosed;
-                break;
-            case kClosed:
-                clawState = ClawConfig.ClawState.kOpen;
-                break;
-        }
+        // switch (clawState) {
+        //     case kOpen:
+        //         clawState = ClawConfig.ClawState.kClosed;
+        //         break;
+        //     case kClosed:
+        //         clawState = ClawConfig.ClawState.kOpen;
+        //         break;
+        // }
 
-        System.out.println("Setting claw state: " + clawState.name());
+        Value toggleValue = clawSolenoid.get() == Value.kForward ? Value.kReverse : Value.kForward;
+        clawSolenoid.set(toggleValue);
+        
+        
+        // System.out.println("Setting claw state: " + clawState.name());
 
-        clawSolenoid.set(clawState.state);
+       
     }
 }
