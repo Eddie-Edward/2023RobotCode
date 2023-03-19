@@ -72,8 +72,6 @@ public class RobotContainer {
 //        autoChooser = getAutonChooser();
 //        SmartDashboard.putData(autoChooser);
 
-        pcm = new PneumaticsControlModule();
-        pcm.enableCompressorDigital();
     }
 
     /**
@@ -83,7 +81,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return getAutonChooser().getSelected();
+        return AutonMaster.testAutoBlue();
     }
 
     private SendableChooser<Command> getAutonChooser() {

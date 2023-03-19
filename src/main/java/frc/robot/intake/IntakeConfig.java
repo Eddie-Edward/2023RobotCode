@@ -67,7 +67,7 @@ public class IntakeConfig {
 
     // Intake Profiles
     public static IntakeProfile kConeProfile = new IntakeProfile(0, 0, 0.4, "Cone");
-    public static IntakeProfile kCubeProfile = new IntakeProfile(0, 0, 0.9, "Cube");
+    public static IntakeProfile kCubeProfile = new IntakeProfile(10, 10, 0.9, "Cube");
     public static IntakeProfile kDefaultProfile = new IntakeProfile(0, 0, 1, "Default");
 
     // Pivot PID constants
