@@ -1,27 +1,22 @@
 package frc.robot;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.intake.IntakeHood;
-import org.photonvision.PhotonCamera;
 
-import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import frc.robot.driver.DriverGamepad;
 import frc.robot.intake.IntakePivot;
 import frc.robot.intake.IntakeRoller;
 import frc.robot.intake.commands.HoldPivot;
-
+import frc.robot.operator.OperatorGamepad;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDrivetrainConstants;
-import frc.robot.commands.TeleopDrive;
-import frc.robot.commands.autos.AutonMaster;
-import frc.robot.commands.autos.OnePieceInside;
-import frc.robot.commands.autos.TestAuton;
-import frc.robot.commands.autos.TwoPieceInsideBalance;
-import frc.robot.commands.autos.TwoPieceOutsideBalance;
+import frc.robot.autos.AutonMaster;
+import frc.robot.claw.Claw;
 import frc.robot.drivetrain.SwerveDrivetrain;
-import frc.robot.vision.PoseEstimator;
+import frc.robot.drivetrain.commands.TeleopDrive;
+import frc.robot.elevator.Elevator;
 
 
 public class RobotContainer {
@@ -31,6 +26,7 @@ public class RobotContainer {
     /*Declare Joystick*/
     public static XboxController driverControllerRetro = new XboxController(0);
     public static DriverGamepad driverGamepad;
+    public static OperatorGamepad operatorGamepad;
 
     /*Declare Subsystems*/
     public static SwerveDrivetrain drivetrain;
@@ -38,7 +34,9 @@ public class RobotContainer {
     public static IntakePivot intakePivot;
     public static IntakeRoller intakeRoller;
     public static IntakeHood intakeHood;
-    public static PneumaticsControlModule pcm;
+    public static Elevator elevator;
+    public static Claw claw;
+    //public static PneumaticsControlModule pcm;
 
     /*Sendable Chooser Selector for Auton */
     public static SendableChooser<Command> autoChooser;
@@ -49,10 +47,16 @@ public class RobotContainer {
 //        poseEstimator = new PoseEstimator(orangePi, drivetrain);
         intakePivot = new IntakePivot();
         intakeRoller = new IntakeRoller();
+        intakeHood = new IntakeHood();
+        elevator = new Elevator();
+        claw = new Claw();
+
+    
 
         // Gamepad initialization
         driverGamepad = new DriverGamepad();
-//
+        operatorGamepad = new OperatorGamepad();
+
         drivetrain.setDefaultCommand(new TeleopDrive(drivetrain, driverControllerRetro,
                 XboxController.Axis.kLeftY.value, XboxController.Axis.kLeftX.value, XboxController.Axis.kRightX.value
                 , SwerveDrivetrainConstants.FIELD_RELATIVE, SwerveDrivetrainConstants.OPEN_LOOP));
@@ -60,8 +64,6 @@ public class RobotContainer {
 //        autoChooser = getAutonChooser();
 //        SmartDashboard.putData(autoChooser);
 
-        pcm = new PneumaticsControlModule();
-        pcm.enableCompressorDigital();
     }
 
     /**
@@ -71,21 +73,20 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return new TestAuton(drivetrain);
+        return AutonMaster.testAutoBlue();
     }
 
     private SendableChooser<Command> getAutonChooser() {
-//        SendableChooser<Command> chooser = new SendableChooser<>();
-//        chooser.setDefaultOption("TwoPieceINSIDEBalance", new TwoPieceInsideBalance(drivetrain));
-//        chooser.addOption("TwoPieceOUTSIDEBalance", new TwoPieceOutsideBalance(drivetrain));
-//        chooser.addOption("TestAuton", new TestAuton(drivetrain));
-//        chooser.addOption("OnePieceInside", new OnePieceInside(drivetrain));
-//        return chooser;
-        return null;
+        SendableChooser<Command> chooser = new SendableChooser<>();
+        chooser.setDefaultOption("TestMarkerEvents", AutonMaster.testAutoBlue());
+        return chooser;
     }
 
     public void reset() {
+        CommandScheduler.getInstance().clearButtons();
+        CommandScheduler.getInstance().getActiveButtonLoop().clear();
         driverGamepad.resetConfig();
+        operatorGamepad.resetConfig();
     }
 
     private void setDefaultCommands() {
