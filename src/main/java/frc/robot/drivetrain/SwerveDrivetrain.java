@@ -36,6 +36,7 @@ public class SwerveDrivetrain extends SubsystemBase {
 
     
     public SwerveDrivetrain(){
+        
         m_pigeonGyro = new Pigeon2(SwerveDrivetrainConstants.PIGEON_ID);
         m_pigeonGyro.configFactoryDefault();
         zeroGyro();
