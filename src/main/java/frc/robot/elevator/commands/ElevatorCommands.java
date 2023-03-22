@@ -8,18 +8,18 @@ import frc.robot.elevator.ElevatorConfig.ElevatorPosition;
 
 public class ElevatorCommands {
     public static Command elevatorConeLow() {
-        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kLowCone), RobotContainer.elevator);
+        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kMid), RobotContainer.elevator);
     }
 
     public static Command elevatorConeHigh() {
-        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kHighCone), RobotContainer.elevator);
+        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kHigh), RobotContainer.elevator);
     }
 
     public static Command elevatorCubeLow() {
-        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kLowCube), RobotContainer.elevator);
+        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kMid), RobotContainer.elevator);
     }
 
     public static Command elevatorCubeHigh() {
-        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kHighCube), RobotContainer.elevator);
+        return new InstantCommand(() -> RobotContainer.elevator.setElevatorSetpoint(ElevatorPosition.kHigh), RobotContainer.elevator);
     }
 }

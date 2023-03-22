@@ -25,11 +25,15 @@ public class Elevator extends SubsystemBase {
     private final RelativeEncoder elevatorEncoder;
     private final SparkMaxPIDController elevatorPIDController;
 
+    private ElevatorConfig.ElevatorPosition elevatorState;
+
     public Elevator() {
         elevatorSpark = new CANSparkMax(ElevatorConfig.kElevatorSparkID, MotorType.kBrushless);
         elevatorEncoder = elevatorSpark.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, 8192);
 
         elevatorSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
+
+        elevatorState = ElevatorPosition.kUnspecified;
 
         configureElevatorMotor();
         configureElevatorSensors();
@@ -62,11 +66,6 @@ public class Elevator extends SubsystemBase {
         elevatorSpark.setInverted(ElevatorConfig.kElevatorMotorInverted);
     }
 
-    public void setElevatorOuput(double output) {
-//        System.out.println(output);
-        elevatorSpark.set(output);
-    }
-
     private void configureElevatorSensors() {
         elevatorEncoder.setInverted(ElevatorConfig.kElevatorEncoderInverted);
     }
@@ -79,13 +78,30 @@ public class Elevator extends SubsystemBase {
         return elevatorEncoder.getPosition();
     }
 
+    public double getElevatorVelocity() {
+        return elevatorEncoder.getVelocity();
+    }
+
+    
+    public void stopElevator() {
+        elevatorSpark.set(0);
+    }
+
+    public void setElevatorOutput(double output) {
+        elevatorSpark.set(output);
+    }
     public void setElevatorSetpoint(ElevatorPosition pos) {
-        elevatorPIDController.setReference(pos.getElevatorPos(), CANSparkMax.ControlType.kSmartMotion);
+        elevatorPIDController.setReference(pos.targetPos, CANSparkMax.ControlType.kSmartMotion);
     }
 
     public void resetEncoder() {
         elevatorEncoder.setPosition(0);
+    }   
+
+    public void setElevatorState(ElevatorConfig.ElevatorPosition state) {
+        this.elevatorState = state;
     }
+
 
 
 }

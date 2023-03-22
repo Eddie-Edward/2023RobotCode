@@ -1,22 +1,17 @@
 package frc.robot.elevator;
 
 public class ElevatorConfig {
-    public enum ElevatorPosition {
-        kLowCone(5000), 
-        kHighCone(8000), 
-        kLowCube(5000), 
-        kHighCube(8000);
-
-        private final int targetPos;
+    public enum ElevatorPosition { 
+        kMid(0), 
+        kHigh(0),
+        kZero(0),
+        kUnspecified(0);
+        
+        public final int targetPos;
 
         ElevatorPosition(int targetPos) {
             this.targetPos = targetPos;
         }
-
-        public int getElevatorPos(){
-            return this.targetPos;
-        }
-
     }
 
     public static final int kElevatorSparkID = 51;
@@ -25,7 +20,17 @@ public class ElevatorConfig {
     public static final double kP = 0.0;
     public static final double kI = 0.0;
     public static final double kD = 0.0; 
-    
+
+    //Elevator FF constants (for rio profiling) 
+    public static final double elevkS = 0.0;
+    public static final double elevkV = 0.0;
+    public static final double elevkA = 0.0;
+    public static final double elevkG = 0.0;
+
+    //rio profiling max and min vel
+    public static final double kMaxVelocity = 2000;
+    public static final double kMinVelocity = 0;
+
     public static final double kIz = 0.0;
     public static final double kFF = 0.0;
 

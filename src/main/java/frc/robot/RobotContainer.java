@@ -73,7 +73,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return AutonMaster.testAutoBlue();
+        return getAutonChooser().getSelected();
     }
 
     private SendableChooser<Command> getAutonChooser() {

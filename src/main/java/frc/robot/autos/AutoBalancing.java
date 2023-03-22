@@ -59,7 +59,9 @@ public class AutoBalancing extends CommandBase {
     Logger.getInstance().recordOutput("AutoBalance/Current Angle", currentAngle);
     Logger.getInstance().recordOutput("AutoBalance/Current Output Speed", output);
     
+    
   }
+  
 
   // Called once the command ends or is interrupted.
   @Override

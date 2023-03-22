@@ -25,13 +25,13 @@ public class RunElevatorManual extends CommandBase {
 
   @Override
   public void execute() {
-    elevator.setElevatorOuput(supplier.getAsDouble());
+    elevator.setElevatorOutput(supplier.getAsDouble());
   }
 
 
   @Override
   public void end(boolean interrupted) {
-    elevator.setElevatorOuput(0);
+    elevator.setElevatorOutput(0);
   }
  
   @Override
