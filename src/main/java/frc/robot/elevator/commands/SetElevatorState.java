@@ -66,13 +66,25 @@ public class SetElevatorState extends CommandBase{
     @Override
     public void end(boolean interrupted) {
         System.out.println(getName() + ": end");
-        elevator.setElevatorState(interrupted ? ElevatorPosition.kUnspecified : targetElevatorState);
+        boolean[] elevatorLimitSwitchStates = elevator.getElevatorLimitSwitchState();
+    
+        if(elevatorLimitSwitchStates[0]) {
+            elevator.setElevatorState(ElevatorPosition.kZero);
+        }
+        else if(elevatorLimitSwitchStates[1]) {
+            elevator.setElevatorState(ElevatorPosition.kHigh);
+        }
+        else {
+            elevator.setElevatorState(interrupted ? ElevatorPosition.kUnspecified : targetElevatorState);
+        }
+
         elevator.stopElevator();
     }
 
     @Override
     public boolean isFinished() {
-        return profile != null && profile.isFinished(getElapsedTime());
+        boolean[] elevatorLimitSwitchStates = elevator.getElevatorLimitSwitchState();
+        return ((elevatorLimitSwitchStates[1]) && elevator.getElevatorVelocity() < 0) || (profile != null && profile.isFinished(getElapsedTime()));
     }
 
     private double getElapsedTime() {

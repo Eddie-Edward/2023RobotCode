@@ -16,6 +16,11 @@ public class ElevatorConfig {
 
     public static final int kElevatorSparkID = 51;
     public static final int smartMotionSlot = 0;
+
+    //Limit Switch Port Numbers
+    public static final int kUpperLimitSwitchPort = 1;
+    public static final int kLowerLimitSwitchPort = 2; 
+    
     //Elevator PID Constants
     public static final double kP = 0.0;
     public static final double kI = 0.0;
