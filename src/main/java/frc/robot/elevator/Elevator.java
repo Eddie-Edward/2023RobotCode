@@ -15,7 +15,7 @@ import com.revrobotics.SparkMaxRelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.elevator.ElevatorConfig.ElevatorPosition;
 import frc.robot.elevator.ElevatorConfig;
@@ -24,6 +24,7 @@ public class Elevator extends SubsystemBase {
     private final CANSparkMax elevatorSpark;
     private final RelativeEncoder elevatorEncoder;
     private final SparkMaxPIDController elevatorPIDController;
+    private final DigitalInput lowerLimitSwitch, upperLimitSwitch;
 
     private ElevatorConfig.ElevatorPosition elevatorState;
 
@@ -34,6 +35,9 @@ public class Elevator extends SubsystemBase {
         elevatorSpark.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
         elevatorState = ElevatorPosition.kUnspecified;
+
+        lowerLimitSwitch = new DigitalInput(ElevatorConfig.kLowerLimitSwitchPort);
+        upperLimitSwitch = new DigitalInput(ElevatorConfig.kUpperLimitSwitchPort);
 
         configureElevatorMotor();
         configureElevatorSensors();
@@ -59,11 +63,21 @@ public class Elevator extends SubsystemBase {
 
     @Override
     public void periodic() {
-//        System.out.println("[Elevator] pos: " + elevatorEncoder.getPosition() + ", vel: " + elevatorEncoder.getVelocity());
+       System.out.println("[Elevator] pos: " + elevatorEncoder.getPosition() + ", vel: " + elevatorEncoder.getVelocity());
+
+       if(!lowerLimitSwitch.get() && elevatorState != ElevatorPosition.kZero) {
+            elevatorState = ElevatorPosition.kZero;
+            resetEncoder();
+       }
+       
     }
 
     private void configureElevatorMotor() {
         elevatorSpark.setInverted(ElevatorConfig.kElevatorMotorInverted);
+    }
+
+    public boolean[] getElevatorLimitSwitchState() {
+        return new boolean[]{lowerLimitSwitch.get(),upperLimitSwitch.get()};
     }
 
     private void configureElevatorSensors() {
@@ -88,8 +102,19 @@ public class Elevator extends SubsystemBase {
     }
 
     public void setElevatorOutput(double output) {
-        elevatorSpark.set(output);
+        if(lowerLimitSwitch.get() && output < 0) {
+            elevatorSpark.set(0);
+            System.out.println("Can't go down, limit switch hit!");
+        }
+        else if(upperLimitSwitch.get() && output > 0) {
+            elevatorSpark.set(0);
+            System.out.println("Can't go up, limit switch hit!");
+        }
+        else {
+            elevatorSpark.set(output);
+        }
     }
+
     public void setElevatorSetpoint(ElevatorPosition pos) {
         elevatorPIDController.setReference(pos.targetPos, CANSparkMax.ControlType.kSmartMotion);
     }
@@ -99,6 +124,7 @@ public class Elevator extends SubsystemBase {
     }   
 
     public void setElevatorState(ElevatorConfig.ElevatorPosition state) {
+
         this.elevatorState = state;
     }
 
