@@ -36,8 +36,8 @@ public class OperatorGamepad extends Gamepad {
 
         gamepad.rightBumper.onTrue(ClawCommands.toggleState());
 
-        gamepad.bButton.onTrue(new HandoffCube());
-        gamepad.bButton.and(shift()).onTrue(new HandoffCone());
+        gamepad.bButton.onTrue(new HandoffCone());
+        gamepad.bButton.and(shift()).onTrue(new HandoffCube());
 
         // Intake commands
         gamepad.leftBumper.onTrue(new ToggleHood(RobotContainer.intakeHood));

@@ -9,6 +9,7 @@ import frc.robot.claw.commands.ClawCommands;
 import frc.robot.elevator.ElevatorConfig;
 import frc.robot.elevator.commands.SetElevatorState;
 import frc.robot.intake.IntakeConfig;
+import frc.robot.intake.commands.RunIntake;
 import frc.robot.intake.commands.SetPivotState;
 
 public class HandoffCone extends SequentialCommandGroup {
@@ -18,7 +19,8 @@ public class HandoffCone extends SequentialCommandGroup {
                         .alongWith(ClawCommands.setState(ClawConfig.ClawState.kOpen)),
                 new SetElevatorState(RobotContainer.elevator, ElevatorConfig.ElevatorState.kLoad),
                 new InstantCommand(() -> RobotContainer.intakeHood.setState(IntakeConfig.HoodState.kOpen)),
-                new WaitCommand(1),
+                new WaitCommand(0.25),
+                new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kHandoff).withTimeout(0.75),
                 new SetElevatorState(RobotContainer.elevator, ElevatorConfig.ElevatorState.kZero),
                 ClawCommands.setState(ClawConfig.ClawState.kClosed),
                 new SetElevatorState(RobotContainer.elevator, ElevatorConfig.ElevatorState.kChamber),
