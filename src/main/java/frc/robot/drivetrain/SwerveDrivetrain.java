@@ -251,33 +251,33 @@ public class SwerveDrivetrain extends SubsystemBase {
         }
 
         //UPDATE LOGGER (PERIODIC) -> AdvantageScope Configuration
-        Logger.getInstance().recordOutput("Drive/Odometry/RobotPose2d", m_swerveOdometry.getPoseMeters());
-        Logger.getInstance().recordOutput("Drive/Odometry/RobotPose3d", new Pose3d(m_swerveOdometry.getPoseMeters()));
-        Logger.getInstance().recordOutput("Drive/Yaw/Robot", getNonContinuousGyro());
+        // Logger.getInstance().recordOutput("Drive/Odometry/RobotPose2d", m_swerveOdometry.getPoseMeters());
+        // Logger.getInstance().recordOutput("Drive/Odometry/RobotPose3d", new Pose3d(m_swerveOdometry.getPoseMeters()));
+        // Logger.getInstance().recordOutput("Drive/Yaw/Robot", getNonContinuousGyro());
         
         
-        Logger.getInstance().recordOutput("Drive/FLDrivePosition", m_swerveModules[0].getPosition().distanceMeters);
-        Logger.getInstance().recordOutput("Drive/FLDriveVelocity", Conversions.falconToMPS(m_swerveModules[0].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
-        Logger.getInstance().recordOutput("Drive/FLDriveTemperature", m_swerveModules[0].getDriveTemperature());
-        Logger.getInstance().recordOutput("Drive/FLAngleTemperature", m_swerveModules[0].getAngleTemperature());
+        // Logger.getInstance().recordOutput("Drive/FLDrivePosition", m_swerveModules[0].getPosition().distanceMeters);
+        // Logger.getInstance().recordOutput("Drive/FLDriveVelocity", Conversions.falconToMPS(m_swerveModules[0].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
+        // Logger.getInstance().recordOutput("Drive/FLDriveTemperature", m_swerveModules[0].getDriveTemperature());
+        // Logger.getInstance().recordOutput("Drive/FLAngleTemperature", m_swerveModules[0].getAngleTemperature());
         
-        Logger.getInstance().recordOutput("Drive/FRDrivePosition", m_swerveModules[1].getPosition().distanceMeters);
-        Logger.getInstance().recordOutput("Drive/FRDriveVelocity", Conversions.falconToMPS(m_swerveModules[1].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
-        Logger.getInstance().recordOutput("Drive/FRDriveTemperature", m_swerveModules[1].getDriveTemperature());
-        Logger.getInstance().recordOutput("Drive/FRAngleTemperature", m_swerveModules[1].getAngleTemperature());
+        // Logger.getInstance().recordOutput("Drive/FRDrivePosition", m_swerveModules[1].getPosition().distanceMeters);
+        // Logger.getInstance().recordOutput("Drive/FRDriveVelocity", Conversions.falconToMPS(m_swerveModules[1].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
+        // Logger.getInstance().recordOutput("Drive/FRDriveTemperature", m_swerveModules[1].getDriveTemperature());
+        // Logger.getInstance().recordOutput("Drive/FRAngleTemperature", m_swerveModules[1].getAngleTemperature());
         
-        Logger.getInstance().recordOutput("Drive/BLDrivePosition", m_swerveModules[2].getPosition().distanceMeters);
-        Logger.getInstance().recordOutput("Drive/BLDriveVelocity", Conversions.falconToMPS(m_swerveModules[2].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
-        Logger.getInstance().recordOutput("Drive/BLDriveTemperature", m_swerveModules[2].getDriveTemperature());
-        Logger.getInstance().recordOutput("Drive/BLAngleTemperature", m_swerveModules[2].getAngleTemperature());
+        // Logger.getInstance().recordOutput("Drive/BLDrivePosition", m_swerveModules[2].getPosition().distanceMeters);
+        // Logger.getInstance().recordOutput("Drive/BLDriveVelocity", Conversions.falconToMPS(m_swerveModules[2].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
+        // Logger.getInstance().recordOutput("Drive/BLDriveTemperature", m_swerveModules[2].getDriveTemperature());
+        // Logger.getInstance().recordOutput("Drive/BLAngleTemperature", m_swerveModules[2].getAngleTemperature());
         
-        Logger.getInstance().recordOutput("Drive/BRDrivePosition", m_swerveModules[3].getPosition().distanceMeters);
-        Logger.getInstance().recordOutput("Drive/BRDriveVelocity", Conversions.falconToMPS(m_swerveModules[3].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
-        Logger.getInstance().recordOutput("Drive/BRDriveTemperature", m_swerveModules[3].getDriveTemperature());
-        Logger.getInstance().recordOutput("Drive/BRAngleTemperature", m_swerveModules[3].getAngleTemperature());
+        // Logger.getInstance().recordOutput("Drive/BRDrivePosition", m_swerveModules[3].getPosition().distanceMeters);
+        // Logger.getInstance().recordOutput("Drive/BRDriveVelocity", Conversions.falconToMPS(m_swerveModules[3].getDriveVelocity(), SwerveDrivetrainConstants.WHEEL_CIRCUMFERENCE, SwerveDrivetrainConstants.DRIVE_GEAR_RATIO));
+        // Logger.getInstance().recordOutput("Drive/BRDriveTemperature", m_swerveModules[3].getDriveTemperature());
+        // Logger.getInstance().recordOutput("Drive/BRAngleTemperature", m_swerveModules[3].getAngleTemperature());
        
-        Logger.getInstance().recordOutput("Drive/RealStates", getStates());
-        Logger.getInstance().recordOutput("Drive/SetpointStates", setpointState);
+        // Logger.getInstance().recordOutput("Drive/RealStates", getStates());
+        // Logger.getInstance().recordOutput("Drive/SetpointStates", setpointState);
 
     }
 }
