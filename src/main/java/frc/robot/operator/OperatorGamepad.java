@@ -6,6 +6,7 @@ import frc.SpectrumLib.gamepads.Gamepad;
 import frc.robot.RobotContainer;
 import frc.robot.claw.ClawConfig;
 import frc.robot.claw.commands.ClawCommands;
+import frc.robot.commands.ElevatorZero;
 import frc.robot.commands.HandoffCone;
 import frc.robot.commands.HandoffCube;
 import frc.robot.commands.ScoreHigh;
@@ -29,7 +30,7 @@ public class OperatorGamepad extends Gamepad {
     @Override
     public void setupTeleopButtons() {
         // Elevator commands
-        gamepad.aButton.onTrue(ElevatorCommands.setState(ElevatorConfig.ElevatorState.kZeroGoal));
+        gamepad.aButton.onTrue(new ElevatorZero());
         gamepad.xButton.onTrue(new ScoreMid());
         gamepad.yButton.onTrue(new ScoreHigh());
         gamepad.startButton.onTrue(new InstantCommand(() -> RobotContainer.elevator.zero()));

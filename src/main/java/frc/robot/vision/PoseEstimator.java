@@ -26,13 +26,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.PoseEstimationConstants;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.Constants.VisionConstants;
-import frc.robot.drivetrainOld.SwerveDrivetrain;
+import frc.robot.drivetrain.Drivetrain;
+import frc.robot.drivetrainOld.*;
 
 public class PoseEstimator extends SubsystemBase {
     //Declares the PhotonCamera we use (Limelight 2+)
     private final PhotonCamera photonCamera;
     //Declares the SwerveDrivetrain Subsystem to use
-    private final SwerveDrivetrain m_drivetrain;
+    private final Drivetrain m_drivetrain;
     //Declares the AprilTagLayout on the Charged Up Field
     private final AprilTagFieldLayout aprilTagFieldLayout;
 
@@ -65,7 +66,7 @@ public class PoseEstimator extends SubsystemBase {
   private double previousPipelineTimestamp = 0;
 
   //Constructor for PoseEstimator Subsystem
-  public PoseEstimator(PhotonCamera photonCamera, SwerveDrivetrain drivetrainSubsystem) {
+  public PoseEstimator(PhotonCamera photonCamera, Drivetrain drivetrainSubsystem) {
     //instantiates the photoncamera and swerve drivetrain
     this.photonCamera = photonCamera;
     this.m_drivetrain = drivetrainSubsystem;

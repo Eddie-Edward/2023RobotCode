@@ -48,6 +48,10 @@ public class Elevator extends SubsystemBase {
         encoder.setPosition(0);
     }
 
+    public double getEncoderPosition() {
+        return encoder.getPosition();
+    }
+
     public double getPositionMeters() {
         return ElevatorUtils.rotationsToMeters(encoder.getPosition());
     }
@@ -88,8 +92,8 @@ public class Elevator extends SubsystemBase {
     @Override
     public void periodic() {
         final var states = getLimitStates();
-//        System.out.println("[Elevator] pos: " + getPositionMeters() + ", vel: " + getVelocityMps());
-
+    //    System.out.println("[Elevator] pos: " + getPositionMeters() + ", vel: " + getVelocityMps());
+        System.out.println("Elevator Encoder Pos " + getEncoderPosition());
         if (getLimitStates()[0]) {
             currentState = ElevatorState.kZero;
             zero();

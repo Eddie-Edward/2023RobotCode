@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveDrivetrainConstants;
+import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrainOld.SwerveDrivetrain;
 
 public class AntiSlip extends CommandBase {
@@ -16,8 +17,8 @@ public class AntiSlip extends CommandBase {
   SwerveModuleState[] swerveModuleStates;
   SwerveModuleState[] stopModuleStates;
   
-  SwerveDrivetrain m_SwerveDrivetrain;
-  public AntiSlip(SwerveDrivetrain drivetrain) {
+  Drivetrain m_SwerveDrivetrain;
+  public AntiSlip(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_SwerveDrivetrain = drivetrain;
     addRequirements(m_SwerveDrivetrain);

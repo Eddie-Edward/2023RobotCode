@@ -30,7 +30,7 @@ public class RunElevatorManual extends CommandBase {
 
     @Override
     public void execute() {
-        final var output = supplier.getAsDouble();
+        final double output = supplier.getAsDouble();
         final var limitStates = elevator.getLimitStates();
         if (output < 0 && limitStates[0]) {
             elevator.setElevatorOutput(0);
@@ -39,6 +39,7 @@ public class RunElevatorManual extends CommandBase {
         } else {
             elevator.setElevatorOutput(output * 12.0);
         }
+     
     }
 
     @Override

@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.*;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -136,6 +137,10 @@ public class Drivetrain extends SubsystemBase {
 
     public double getPitchDerivative() {
         return pitchDerivative;
+    }
+
+    public Rotation2d getRoll() {
+        return Rotation2d.fromDegrees(m_gyro.getRoll());
     }
 
 //    public void driveBack() {

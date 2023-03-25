@@ -7,7 +7,7 @@ public class ElevatorConfig {
         kZero(0),
         kZeroGoal(0),
         kMid(0.85),
-        kHigh(1.15),
+        kHigh(1.17),
         kHighGoal(1.15),
         kLoad(0.0437),
         kChamber(0.0935),
@@ -35,10 +35,10 @@ public class ElevatorConfig {
     public static final double kD = 0.0; 
 
     // Elevator FF constants (for rio profiling)
-    public static final double kS = 0.0;
+    public static final double kS = 0.1;
     public static final double kV = 21.5;
     public static final double kA = 1;
-    public static final double kG = 0.4;
+    public static final double kG = 0.5;
 
     // Max velocity and acceleration
     public static final double kMaxVelocity = 0.5;
