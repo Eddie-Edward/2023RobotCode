@@ -12,7 +12,9 @@ import frc.robot.intake.IntakeRoller;
 import frc.robot.intake.commands.HoldPivot;
 import frc.robot.operator.OperatorGamepad;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.autos.AutonMaster;
@@ -61,8 +63,9 @@ public class RobotContainer {
         operatorGamepad = new OperatorGamepad();
 
 
-//        autoChooser = getAutonChooser();
-//        SmartDashboard.putData(autoChooser);
+       autoChooser = getAutonChooser();
+       Shuffleboard.getTab("Auton Chooser");
+       SmartDashboard.putData(autoChooser);
 
         setDefaultCommands();
     }
@@ -74,12 +77,20 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return getAutonChooser().getSelected();
+        return autoChooser.getSelected();
     }
 
     private SendableChooser<Command> getAutonChooser() {
         SendableChooser<Command> chooser = new SendableChooser<>();
-        chooser.setDefaultOption("TestMarkerEvents", AutonMaster.testAutoBlue());
+        chooser.setDefaultOption("Blue2PieceBalance", AutonMaster.bluePreloadPickupScoreBalance());
+        chooser.addOption("BlueNoElevator2PieceBalance", AutonMaster.blueNoElevatorPreloadPickupScoreBalance());
+        chooser.addOption("Blue1PieceBalance", AutonMaster.bluePreloadCommunityBalance());
+        chooser.addOption("Blue1PiecePickupBalance", AutonMaster.blueMiddlePreloadPickupBalance());
+        chooser.addOption("Red2PieceBalance", AutonMaster.redPreloadPickupScoreBalance());
+        chooser.addOption("RedNoElevator2PieceBalance", AutonMaster.redNoElevatorPreloadPickupScoreBalance());
+        chooser.addOption("Red1PieceBalance", AutonMaster.redPreloadCommunityBalance());
+        chooser.addOption("Red1PiecePickupBalance", AutonMaster.redMiddlePreloadPickupBalance());
+        chooser.addOption("Blue", getAutonomousCommand());
         return chooser;
     }
 

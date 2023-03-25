@@ -11,11 +11,12 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveDrivetrainConstants;
+import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrainOld.SwerveDrivetrain;
 
 public class AutoBalancing extends CommandBase {
   /** Creates a new AutoBalancing. */
-  private final SwerveDrivetrain mSwerveDrivetrain;
+  private final Drivetrain mSwerveDrivetrain;
   private final PIDController balanceController;
 
   private final double BALANCE_GOAL = 0;
@@ -28,7 +29,7 @@ public class AutoBalancing extends CommandBase {
 
   private double currentAngle, output; 
 
-  public AutoBalancing(SwerveDrivetrain drivetrain) {
+  public AutoBalancing(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     mSwerveDrivetrain = drivetrain;
     addRequirements(mSwerveDrivetrain);
@@ -70,10 +71,6 @@ public class AutoBalancing extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(balanceController.atSetpoint()) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 }
