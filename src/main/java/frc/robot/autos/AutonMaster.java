@@ -35,6 +35,8 @@ public final class AutonMaster {
     private static final PathConstraints GENERIC_PATH_CONSTRAINTS = new PathConstraints(4, 3);
 
     private static final PathConstraints SLOW_PATH_CONSTRAINTS = new PathConstraints(2, 1);
+
+    private static final PathConstraints MEDIUM_PATH_CONSTRAINTS = new PathConstraints(3, 2);
     public static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
         Map.entry("Stop", new InstantCommand(RobotContainer.drivetrain::stopSwerve)),
         
@@ -144,6 +146,14 @@ public final class AutonMaster {
 
     public static Command redScoreLowMobility() { 
         return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedScoreLowMobility", new PathConstraints(3, 2)));
+    }
+
+    public static Command blueNoElevatorOneandHalfPiece() { 
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueNoElevator1.5Piece", MEDIUM_PATH_CONSTRAINTS));
+    }
+
+    public static Command blueOneandHalfPieceBalance() {
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("blueOneandHalfPieceBalance", SLOW_PATH_CONSTRAINTS));
     }
 
     public AutonMaster() {
