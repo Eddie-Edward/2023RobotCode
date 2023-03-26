@@ -79,7 +79,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         /*Returns Auton Commands (Sendable Chooser) */
-        return autoChooser.getSelected();
+        return AutonMaster.redScoreLowMobility();
     }
 
     private SendableChooser<Command> getAutonChooser() {
@@ -90,9 +90,10 @@ public class RobotContainer {
         chooser.addOption("Blue1PiecePickupBalance", AutonMaster.blueMiddlePreloadPickupBalance());
         chooser.addOption("Red2PieceBalance", AutonMaster.redPreloadPickupScoreBalance());
         chooser.addOption("RedNoElevator2PieceBalance", AutonMaster.redNoElevatorPreloadPickupScoreBalance());
-        chooser.addOption("Red1PieceBalance", AutonMaster.redPreloadCommunityBalance());
+        chooser.addOption("RedPreloadPieceCommunityBalance", AutonMaster.redPreloadCommunityBalance()); 
         chooser.addOption("Red1PiecePickupBalance", AutonMaster.redMiddlePreloadPickupBalance());
-        chooser.addOption("Blue", getAutonomousCommand());
+        chooser.addOption("TestAutoBalance", AutonMaster.testAutoBalance());
+        chooser.addOption("BlueScoreLowMobility", AutonMaster.blueScoreLowMobility());
         return chooser;
     }
 

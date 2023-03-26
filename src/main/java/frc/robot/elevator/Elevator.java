@@ -93,7 +93,7 @@ public class Elevator extends SubsystemBase {
     public void periodic() {
         final var states = getLimitStates();
     //    System.out.println("[Elevator] pos: " + getPositionMeters() + ", vel: " + getVelocityMps());
-        System.out.println("Elevator Encoder Pos " + getEncoderPosition());
+       // System.out.println("Elevator Encoder Pos " + getEncoderPosition());
         if (getLimitStates()[0]) {
             currentState = ElevatorState.kZero;
             zero();

@@ -17,9 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "ScoreHigh",
-          "ElevatorZero",
-          "ElevatorZero"
+          "ScoreHigh"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -60,33 +58,6 @@
         "x": 3.856169766547807,
         "y": 4.597054101383524
       },
-      "nextControl": {
-        "x": 1.5098212732591842,
-        "y": 4.396297011048668
-      },
-      "holonomicAngle": 0,
-      "isReversal": false,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": true,
-      "stopEvent": {
-        "names": [
-          "ScoreHigh"
-        ],
-        "executionBehavior": "sequential",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 3.9476534302569317,
-        "y": 2.996089986473838
-      },
-      "prevControl": {
-        "x": 2.7469303440746677,
-        "y": 2.83599357498287
-      },
       "nextControl": null,
       "holonomicAngle": 0,
       "isReversal": false,
@@ -95,7 +66,8 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "AutoBalance"
+          "HandoffCube",
+          "ScoreHigh"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -111,9 +83,9 @@
       ]
     },
     {
-      "position": 1.6363636363636236,
+      "position": 0.21818181818183732,
       "names": [
-        "HandoffCube"
+        "ElevatorZero"
       ]
     }
   ]

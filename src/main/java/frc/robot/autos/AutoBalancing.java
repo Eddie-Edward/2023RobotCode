@@ -9,6 +9,7 @@ import org.littletonrobotics.junction.Logger;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.SwerveDrivetrainConstants;
 import frc.robot.drivetrain.Drivetrain;
@@ -29,6 +30,7 @@ public class AutoBalancing extends CommandBase {
 
   private double currentAngle, output; 
 
+
   public AutoBalancing(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     mSwerveDrivetrain = drivetrain;
@@ -46,7 +48,7 @@ public class AutoBalancing extends CommandBase {
   }
 
   // Called every time the scheduler runs while the command is scheduled.
-  @Override
+  @Override 
   public void execute() {
     currentAngle = mSwerveDrivetrain.getRoll().getDegrees();
 
@@ -54,9 +56,11 @@ public class AutoBalancing extends CommandBase {
 
     mSwerveDrivetrain.drive(new Translation2d(-output, 0), 0, true, true);
 
+    
+
     System.out.println("Current Angle " + currentAngle + " Output " + output); 
-    Logger.getInstance().recordOutput("AutoBalance/Current Angle", currentAngle);
-    Logger.getInstance().recordOutput("AutoBalance/Current Output Speed", output);
+    // Logger.getInstance().recordOutput("AutoBalance/Current Angle", currentAngle);
+    // Logger.getInstance().recordOutput("AutoBalance/Current Output Speed", output);
     
     
   }
@@ -71,6 +75,6 @@ public class AutoBalancing extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return balanceController.atSetpoint();
   }
 }

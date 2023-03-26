@@ -26,7 +26,7 @@ public class HoldPivot extends CommandBase {
                 pivot.setIdleMode(CANSparkMax.IdleMode.kBrake);
                 break;
             case kStowed:
-                pivot.setIdleMode(CANSparkMax.IdleMode.kCoast);
+                pivot.setIdleMode(CANSparkMax.IdleMode.kBrake);
                 break;
             default:
                 pivot.setIdleMode(CANSparkMax.IdleMode.kBrake);

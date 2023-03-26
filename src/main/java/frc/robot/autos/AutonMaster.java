@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.Constants.*;
 import frc.robot.intake.IntakePivot;
@@ -31,7 +33,8 @@ import frc.robot.elevator.commands.SetElevatorState;
 public final class AutonMaster {
 
     private static final PathConstraints GENERIC_PATH_CONSTRAINTS = new PathConstraints(4, 3);
-    
+
+    private static final PathConstraints SLOW_PATH_CONSTRAINTS = new PathConstraints(2, 1);
     public static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
         Map.entry("Stop", new InstantCommand(RobotContainer.drivetrain::stopSwerve)),
         
@@ -45,6 +48,7 @@ public final class AutonMaster {
         
         Map.entry("IntakeUp", 
         new SetPivotState(RobotContainer.intakePivot, PivotState.kStowed)),
+        
 
         Map.entry("ScoreHigh", new SequentialCommandGroup(
             ClawCommands.setState(ClawState.kClosed),   
@@ -61,9 +65,11 @@ public final class AutonMaster {
             )),
 
         Map.entry("ScoreLow", new SequentialCommandGroup(
-            new SetPivotState(RobotContainer.intakePivot, PivotState.kHumanPlayer),
-            new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kOuttake)
+            new SetPivotState(RobotContainer.intakePivot, PivotState.kScoreLow),
+            new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kOuttake).withTimeout(1)
         )),
+    
+        Map.entry("Wait2Seconds", new WaitCommand(2)),
 
 
         Map.entry("HandoffCone", new HandoffCone()),
@@ -72,7 +78,7 @@ public final class AutonMaster {
 
         Map.entry("ClearHood", new ClearHood()),
         
-        Map.entry("ElevatorDown", new SetElevatorState(RobotContainer.elevator, ElevatorState.kZero)),
+        Map.entry("ElevatorZero", new ElevatorZero()),
 
         Map.entry("AutoBalance", new AutoBalancing(RobotContainer.drivetrain)),
         
@@ -101,7 +107,7 @@ public final class AutonMaster {
     }
 
     public static Command bluePreloadPickupScoreBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BluePreloadPickUpScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BluePreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command blueMiddlePreloadPickupBalance() { 
@@ -113,11 +119,11 @@ public final class AutonMaster {
     }
 
     public static Command redPreloadCommunityBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadCommunityBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadCommunityBalance", new PathConstraints(2, 1.5)));
     }
 
     public static Command redPreloadPickupScoreBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadPickUpScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command redMiddlePreloadPickupBalance() { 
@@ -128,9 +134,17 @@ public final class AutonMaster {
         return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedNoElevatorPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
+    public static Command testAutoBalance() { 
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("TestAutoBalance", SLOW_PATH_CONSTRAINTS));
+    }
 
+    public static Command blueScoreLowMobility() { 
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueScoreLowMobility", new PathConstraints(3, 2)));
+    }
 
-
+    public static Command redScoreLowMobility() { 
+        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedScoreLowMobility", new PathConstraints(3, 2)));
+    }
 
     public AutonMaster() {
         throw new UnsupportedOperationException("Master Auton Class!");

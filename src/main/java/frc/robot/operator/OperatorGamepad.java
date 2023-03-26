@@ -3,8 +3,11 @@ package frc.robot.operator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.SpectrumLib.gamepads.Gamepad;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
+import frc.robot.autos.AutoBalancing;
 import frc.robot.claw.ClawConfig;
+import frc.robot.claw.ClawConfig.ClawState;
 import frc.robot.claw.commands.ClawCommands;
 import frc.robot.commands.ElevatorZero;
 import frc.robot.commands.HandoffCone;
@@ -32,10 +35,14 @@ public class OperatorGamepad extends Gamepad {
         // Elevator commands
         gamepad.aButton.onTrue(new ElevatorZero());
         gamepad.xButton.onTrue(new ScoreMid());
+        gamepad.xButton.onTrue(new AutoBalancing(RobotContainer.drivetrain));
+
         gamepad.yButton.onTrue(new ScoreHigh());
         gamepad.startButton.onTrue(new InstantCommand(() -> RobotContainer.elevator.zero()));
 
         gamepad.rightBumper.onTrue(ClawCommands.toggleState());
+
+
 
         gamepad.bButton.onTrue(new HandoffCone());
         gamepad.bButton.and(shift()).onTrue(new HandoffCube());

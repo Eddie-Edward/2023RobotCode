@@ -46,7 +46,9 @@ public class IntakePivot extends SubsystemBase {
      */
     public double getAngleRads() {
         final var angle = Conversions.rotationToRadians(encoder.getPosition());
-        return (angle >= 6) ? 0 : angle;
+        // return (angle >= 6) ? 0 : angle;
+        return angle;
+        // return encoder.getPosition();
     }
 
     /**

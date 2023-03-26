@@ -17,7 +17,7 @@ public class IntakeConfig {
 
     public enum PivotState {
         kDeployed(0),
-        kStowed(Conversions.degreesToRadians(135)),
+        kStowed(Conversions.degreesToRadians(120)),
         kScoreLow(Conversions.degreesToRadians(60)),
         kHumanPlayer(Conversions.degreesToRadians(135)),
         kNeutral(2.53),
@@ -91,7 +91,7 @@ public class IntakeConfig {
 
     // Sensor Parameters
     public static final boolean kPivotEncoderInverted = true;
-    public static final double kPivotZeroOffset = 0.98;
+    public static final double kPivotZeroOffset = 0.979;
 
     // Tensioning constants
     public static final double kTensionOutput = -0.03;

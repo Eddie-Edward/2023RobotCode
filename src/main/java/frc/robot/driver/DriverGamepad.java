@@ -33,6 +33,7 @@ public class DriverGamepad extends Gamepad {
                 this::getDriveRotation
         ));
 
+        // Intake controls
         gamepad.rightTriggerButton.whileTrue(new RunIntake(RobotContainer.intakeRoller, () -> {
             if (getRightTriggerRaw() < 0.9) {
                 return RunIntake.Mode.kCube;
@@ -40,8 +41,8 @@ public class DriverGamepad extends Gamepad {
                 return RunIntake.Mode.kCone;
             }
         }));
-
-        gamepad.rightBumper.onTrue(new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kDeployed));
+        gamepad.rightTriggerButton.onTrue(new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kDeployed));
+        gamepad.rightTriggerButton.onFalse(new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kStowed));
     }
 
     @Override

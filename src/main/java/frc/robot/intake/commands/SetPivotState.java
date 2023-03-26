@@ -65,6 +65,7 @@ public class SetPivotState extends CommandBase {
         if (pivot.getLimitSwitchState()) {
             state = IntakeConfig.PivotState.kDeployed;
         } else if (interrupted) {
+            System.out.println("pivot set state interrupted");
             state = IntakeConfig.PivotState.kUnspecified;
         } else {
             state = targetPivotState;
@@ -78,8 +79,12 @@ public class SetPivotState extends CommandBase {
     public boolean isFinished() {
         final var time = getElapsedTime();
 
+        if (profile != null && time > 0.25 && profile.calculate(time).velocity < 0 && pivot.getLimitSwitchState()) {
+            System.out.println("Canceling due to limit switch...");
+        }
+
         // 1) Profile is still running and reached limit switch
-        return (profile != null && profile.calculate(time).velocity < 0 && pivot.getLimitSwitchState()) ||
+        return (profile != null && time > 0.25 && profile.calculate(time).velocity < 0 && pivot.getLimitSwitchState()) ||
                 (profile != null && profile.isFinished(time));
     }
 
@@ -96,7 +101,7 @@ public class SetPivotState extends CommandBase {
         System.out.println("Start: " + startPos + ", End: " + endPos + ", Dist: " + distance);
 
         final TrapezoidProfile.State startState, goalState;
-        if (startPos < endPos) {
+        if (startPos > 5.8 || startPos < endPos) {
             goalState = new TrapezoidProfile.State(distance, 0.0);
             startState = new TrapezoidProfile.State(0.0, pivot.getVelocityRps());
         } else {

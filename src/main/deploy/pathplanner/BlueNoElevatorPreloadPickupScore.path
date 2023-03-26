@@ -2,22 +2,22 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.7406100432742944,
-        "y": 5.008730588074586
+        "x": 1.7520455012379348,
+        "y": 5.031601504001866
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.7406100432742946,
-        "y": 5.008730588074586
+        "x": 4.027701636002416,
+        "y": 5.065907877892789
       },
-      "holonomicAngle": 0,
+      "holonomicAngle": -178.91907581333925,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "ScoreHigh"
+          "ScoreLow"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -26,16 +26,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.680727883567037,
-        "y": 4.597054101383524
+        "x": 6.463454182257865,
+        "y": 4.585618643419883
       },
       "prevControl": {
-        "x": 5.800197620366711,
-        "y": 4.688537765092648
+        "x": 4.1420562156388225,
+        "y": 4.654231391201726
       },
       "nextControl": {
-        "x": 5.800197620366711,
-        "y": 4.688537765092648
+        "x": 4.1420562156388225,
+        "y": 4.654231391201726
       },
       "holonomicAngle": 0,
       "isReversal": true,
@@ -43,7 +43,11 @@
       "isLocked": false,
       "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeDown",
+          "Wait2Seconds",
+          "IntakeUp"
+        ],
         "executionBehavior": "sequential",
         "waitBehavior": "after",
         "waitTime": 1.0
@@ -51,39 +55,31 @@
     },
     {
       "anchorPoint": {
-        "x": 3.7189442709841196,
-        "y": 2.6873326214555413
+        "x": 1.7634809592015757,
+        "y": 4.414086773965274
       },
       "prevControl": {
-        "x": 5.857374910184913,
-        "y": 3.099009108146604
+        "x": 3.7646861028386778,
+        "y": 4.414086773965274
       },
       "nextControl": null,
-      "holonomicAngle": 0.0,
+      "holonomicAngle": -180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "ScoreLow"
+        ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
-  "markers": [
-    {
-      "position": 0.4072727272727248,
-      "names": [
-        "IntakeDown"
-      ]
-    },
-    {
-      "position": 1.469090909090916,
-      "names": [
-        "IntakeUp"
-      ]
-    }
-  ]
+  "maxVelocity": 3.0,
+  "maxAcceleration": 2.0,
+  "isReversed": null,
+  "markers": []
 }
