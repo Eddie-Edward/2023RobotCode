@@ -103,80 +103,82 @@ public final class AutonMaster {
 
 
 
+
     public static Command testAutoBlue() {
         return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestBlueEventMap", GENERIC_PATH_CONSTRAINTS));
     }
 
+
     public static Command bluePreloadCommunityBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BluePreloadCommunityBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluePreloadCommunityBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command bluePreloadPickupScoreBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BluePreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluePreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command blueMiddlePreloadPickupBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueMiddlePreloadPickupBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueMiddlePreloadPickupBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command blueNoElevatorPreloadPickupScoreBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueNoElevatorPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueNoElevatorPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command redPreloadCommunityBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadCommunityBalance", new PathConstraints(2, 1.5)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedPreloadCommunityBalance", new PathConstraints(2, 1.5)));
     }
 
     public static Command redPreloadPickupScoreBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command redMiddlePreloadPickupBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedMiddlePreloadPickupBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedMiddlePreloadPickupBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command redNoElevatorPreloadPickupScoreBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedNoElevatorPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedNoElevatorPreloadPickupScoreBalance", GENERIC_PATH_CONSTRAINTS));
     }
 
     public static Command testAutoBalance() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("TestAutoBalance", SLOW_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestAutoBalance", SLOW_PATH_CONSTRAINTS));
     }
 
     public static Command blueScoreLowMobility() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueScoreLowMobility", new PathConstraints(3, 2)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueScoreLowMobility", new PathConstraints(3, 2)));
     }
 
     public static Command redScoreLowMobility() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedScoreLowMobility", new PathConstraints(3, 2)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedScoreLowMobility", new PathConstraints(3, 2)));
     }
 
     public static Command blueNoElevatorOneandHalfPiece() { 
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueNoElevator1.5Piece", MEDIUM_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueNoElevator1.5Piece", MEDIUM_PATH_CONSTRAINTS));
     }
 
     public static Command blueOneandHalfPieceBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("blueOneandHalfPieceBalance", SLOW_PATH_CONSTRAINTS));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("blueOneandHalfPieceBalance", SLOW_PATH_CONSTRAINTS));
     }
 
     public static Command blueRightScoreLowMobility() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueRightScoreLowMobility", new PathConstraints(3, 1.5)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueRightScoreLowMobility", new PathConstraints(3, 1.5)));
     }
 
     public static Command blueLeft1_5CubeMid() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueLeft1.5CubeMid", new PathConstraints(3, 2)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueLeft1.5CubeMid", new PathConstraints(3, 2)));
     }
 
     public static Command blusCenterLowScoreBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueCenterLowScoreBalance", new PathConstraints(2, 2)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueCenterLowScoreBalance", new PathConstraints(2, 2)));
     }
 
     public static Command redBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("RedBalance", new PathConstraints(2, 2)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedBalance", new PathConstraints(2, 2)));
     }
 
     public static Command midBalance() {
-        return m_autoBuilder.fullAuto(PathPlanner.loadPath("BlueCenterMidScoreBalance", new PathConstraints(1, 1)));
+        return m_autoBuilder.fullAuto(PathPlanner.loadPathGroup("BlueCenterMidScoreBalance", new PathConstraints(1, 1)));
     }
 
     public AutonMaster() {
