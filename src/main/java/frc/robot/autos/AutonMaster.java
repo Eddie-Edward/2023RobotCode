@@ -29,6 +29,7 @@ import frc.robot.commands.HandoffCone;
 import frc.robot.commands.HandoffCube;
 import frc.robot.commands.ScoreHigh;
 import frc.robot.commands.ScoreMid;
+import frc.robot.drivetrain.commands.AntiSlip;
 import frc.robot.elevator.ElevatorConfig.ElevatorState;
 import frc.robot.elevator.commands.SetElevatorState;
 
@@ -100,7 +101,6 @@ public final class AutonMaster {
         eventMap, 
         false, 
         RobotContainer.drivetrain);
-
 
 
 
