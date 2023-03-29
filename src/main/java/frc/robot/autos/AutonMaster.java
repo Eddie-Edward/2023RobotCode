@@ -165,7 +165,9 @@ public final class AutonMaster {
                 "clear_2_high_cone_mid_cube_shoot",
                 "Clear 2 Piece High Cone Mid Cube",
                 AutonConstraints.kCreep.get(),
-                AutonConstraints.kSlow.get()
+                AutonConstraints.kSlow.get(),
+                AutonConstraints.kGeneric.get(),
+                AutonConstraints.kGeneric.get()
         ),
         kCharge1MidCubeShootBalance(
                 "charge_1_mid_cube_shoot_balance",
