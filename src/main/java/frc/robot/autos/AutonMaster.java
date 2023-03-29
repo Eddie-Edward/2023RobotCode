@@ -161,6 +161,12 @@ public final class AutonMaster {
                 AutonConstraints.kCreep.get(),
                 AutonConstraints.kSlow.get()
         ),
+        kClear2HighConeMidCubeShoot(
+                "clear_2_high_cone_mid_cube_shoot",
+                "Clear 2 Piece High Cone Mid Cube",
+                AutonConstraints.kCreep.get(),
+                AutonConstraints.kSlow.get()
+        ),
         kCharge1MidCubeShootBalance(
                 "charge_1_mid_cube_shoot_balance",
                 "Charge 1 Mid Cube Shoot + Balance",
@@ -188,6 +194,7 @@ public final class AutonMaster {
                 AutonConstraints.kCreep.get(),
                 AutonConstraints.kSlow.get()
         );
+
 
         AutonPath(String pathName, String displayName, PathConstraints constraint, PathConstraints... constraints) {
             trajectory = PathPlanner.loadPathGroup(pathName, constraint, constraints);
