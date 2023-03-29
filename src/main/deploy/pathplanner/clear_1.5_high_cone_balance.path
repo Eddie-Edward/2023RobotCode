@@ -44,9 +44,10 @@
       "isStopPoint": true,
       "stopEvent": {
         "names": [
-          "DropPiece"
+          "DropPiece",
+          "ElevatorZero"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
