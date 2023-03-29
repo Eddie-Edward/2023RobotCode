@@ -1,5 +1,6 @@
 package frc.robot.autos;
 
+import java.lang.annotation.ElementType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import frc.robot.commands.HandoffCube;
 import frc.robot.commands.ScoreHigh;
 import frc.robot.commands.ScoreMid;
 import frc.robot.drivetrain.commands.AntiSlip;
+import frc.robot.elevator.ElevatorConfig.ElevatorState;
+import frc.robot.elevator.commands.SetElevatorState;
 
 public final class AutonMaster {
     private static final PathConstraints GENERIC_PATH_CONSTRAINTS = new PathConstraints(3.5, 3);
@@ -86,6 +89,10 @@ public final class AutonMaster {
             Map.entry("AutoBalance", new AutoBalancing(RobotContainer.drivetrain)),
 
             Map.entry("AntiSlip", new AntiSlip(RobotContainer.drivetrain)),
+
+            Map.entry("ElevatorHigh", new SetElevatorState(RobotContainer.elevator, ElevatorState.kHighGoal)),
+
+            Map.entry("ElevatorMid", new SetElevatorState(RobotContainer.elevator, ElevatorState.kMid)),
 
             Map.entry("DropPiece", new InstantCommand(() -> {
                 RobotContainer.claw.setClawState(ClawState.kOpen);
