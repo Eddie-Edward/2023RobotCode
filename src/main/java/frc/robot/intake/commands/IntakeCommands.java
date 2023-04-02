@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.RobotContainer;
 import frc.robot.intake.IntakeConfig;
+import frc.robot.intake.IntakeRoller;
 import frc.robot.intake.IntakeConfig.PivotState;
 
 import java.util.function.DoubleSupplier;
@@ -16,6 +17,10 @@ public class IntakeCommands {
     public static Command setPivotState(IntakeConfig.PivotState state) {
 //        return new InstantCommand(() -> RobotContainer.intakePivot.setPivotState(state), RobotContainer.intakePivot);
         return null;
+    }
+
+    public static Command runRollerManual(IntakeRoller roller, double supplier) {
+        return new InstantCommand(() -> roller.setOutput(supplier));
     }
 
     @Deprecated

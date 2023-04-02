@@ -6,10 +6,10 @@ public class ElevatorConfig {
     public enum ElevatorState {
         kZero(0),
         kZeroGoal(0),
-        kMid(0.85),
+        kMid(0.9),
         kHigh(1.17),
         kHighGoal(1.15),
-        kLoad(0.05),
+        kLoad(0.08),
         kChamber(0.0935),
         kPreScore(0.165),
         kUnspecified(0);

@@ -17,7 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "ShootCube"
+          "ShootCubeHigh"
         ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
@@ -51,11 +51,11 @@
     },
     {
       "anchorPoint": {
-        "x": 4.5,
+        "x": 4.25,
         "y": 2.75
       },
       "prevControl": {
-        "x": 5.014162239419364,
+        "x": 4.764162239419364,
         "y": 2.75
       },
       "nextControl": null,

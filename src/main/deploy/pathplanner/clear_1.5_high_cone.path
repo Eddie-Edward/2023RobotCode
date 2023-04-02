@@ -44,9 +44,10 @@
       "isStopPoint": true,
       "stopEvent": {
         "names": [
-          "DropPiece"
+          "DropPiece",
+          "ElevatorZero"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
@@ -74,5 +75,12 @@
       }
     }
   ],
-  "markers": []
+  "markers": [
+    {
+      "position": 1.2363636363636403,
+      "names": [
+        "IntakeDown"
+      ]
+    }
+  ]
 }

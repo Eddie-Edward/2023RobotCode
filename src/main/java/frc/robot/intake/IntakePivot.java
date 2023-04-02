@@ -33,7 +33,7 @@ public class IntakePivot extends SubsystemBase {
     }
 
     private void configureSensors() {
-        encoder.setZeroOffset(IntakeConfig.kPivotZeroOffset);
+        // encoder.setZeroOffset(IntakeConfig.kPivotZeroOffset);
         encoder.setInverted(IntakeConfig.kPivotEncoderInverted);
     }
 
@@ -95,8 +95,9 @@ public class IntakePivot extends SubsystemBase {
         if (getLimitSwitchState()) {
 //            encoder.setZeroOffset(encoder.getPosition());
         }
-//        System.out.println("[pivot] pos (" + getAngleRads() + "), vel (" + getVelocityRps() + ")");
-        updateSmartDashboard();
+    //    System.out.println("[pivot] pos (" + encoder.getPosition() + "), vel (" + getVelocityRps() + ")");
+        // System.out.println(getLimitSwitchState());
+    updateSmartDashboard();
     }
 
     private void updateSmartDashboard() {

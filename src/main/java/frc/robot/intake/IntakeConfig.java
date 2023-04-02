@@ -17,10 +17,12 @@ public class IntakeConfig {
 
     public enum PivotState {
         kDeployed(0),
-        kStowed(Conversions.degreesToRadians(90)),
+        kStowed(Conversions.degreesToRadians(110)),
         kScoreLow(Conversions.degreesToRadians(60)),
         kHumanPlayer(Conversions.degreesToRadians(135)),
-        kNeutral(2.53),
+        kShoot(Conversions.degreesToRadians(60)),
+        kShootHigh(2.05),
+        kNeutral(2.3),
         kUnspecified(0);
 
         /**
@@ -68,9 +70,10 @@ public class IntakeConfig {
     public static final CANSparkMax.IdleMode kRollerIdleMode = CANSparkMax.IdleMode.kCoast;
 
     // Intake Profiles
-    public static IntakeProfile kConeProfile = new IntakeProfile(50, 50, 1, "Cone");
-    public static IntakeProfile kCubeProfile = new IntakeProfile(10, 30, 0.75, "Cube");
-    public static IntakeProfile kOuttake = new IntakeProfile(50, 50, -1, "Output");
+    public static IntakeProfile kConeProfile = new IntakeProfile(60, 60, 1, "Cone");
+    public static IntakeProfile kCubeProfile = new IntakeProfile(25, 35, 0.75, "Cube");
+    public static IntakeProfile kOuttake = new IntakeProfile(60, 60, -1, "OutTake");
+    public static IntakeProfile kShoot = new IntakeProfile(60, 60, -.8, "ShootCube");
     public static IntakeProfile kHandoff = new IntakeProfile(40, 40, 0.5, "Handoff");
     public static IntakeProfile kDefaultProfile = new IntakeProfile(40, 40, 1, "Default");
 
@@ -91,10 +94,10 @@ public class IntakeConfig {
 
     // Sensor Parameters
     public static final boolean kPivotEncoderInverted = true;
-    public static final double kPivotZeroOffset = 0.979;
+    public static final double kPivotZeroOffset = 0.95;
 
     // Tensioning constants
-    public static final double kTensionOutput = -0.03;
+    public static final double kTensionOutput = -0.02;
     public static final double kTensionFindOutput = -0.05;
 
     public static final int kDefaultContinuousCurrentLimit = 35;

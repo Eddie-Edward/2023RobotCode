@@ -18,9 +18,9 @@ a modifier key (a la shift), other buttons / axis can then be mapped to differen
 | DPad Down      | Move intake to low scoring position          |
 | DPad Left      | Move intake to stowed position               |
 | DPad Right     | Move intake to deployed position             |
-| Start          | N/A                                          |
+| Start          | Shoot Cubes                                  |
 | Select         | N/A                                          |
-| Left Bumper    | N/A                                          |
+| Left Bumper    | Toggle Hood                                  |
 | Right Bumper   | Toggle claw                                  |
 | Left Trigger   | N/A                                          |
 | Right Trigger  | N/A                                          |

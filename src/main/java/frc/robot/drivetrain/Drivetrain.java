@@ -46,6 +46,9 @@ public class Drivetrain extends SubsystemBase {
         m_forward_bang_bang.setSetpoint(DRIVE_BANG_BANG_SP);
         m_reverse_bang_bang = new BangBangController();
         m_reverse_bang_bang.setSetpoint(-DRIVE_BANG_BANG_SP);
+
+        Timer.delay(1);
+        resetModules();
     }
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
@@ -81,8 +84,7 @@ public class Drivetrain extends SubsystemBase {
             mod.setDesiredState(swerveModuleStates[mod.getModuleId()], isOpenLoop);
         }
 
-        Timer.delay(1);
-        resetModules();
+        
     }
 
     public void setChassisSpeeds(ChassisSpeeds targetSpeeds) {

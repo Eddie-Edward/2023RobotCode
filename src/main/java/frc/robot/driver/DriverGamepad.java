@@ -22,7 +22,7 @@ public class DriverGamepad extends Gamepad {
 
     @Override
     public void setupTeleopButtons() {
-        gamepad.startButton.onTrue(new InstantCommand(() -> RobotContainer.drivetrain.zeroGyro()));
+        gamepad.leftBumper.onTrue(new InstantCommand(() -> RobotContainer.drivetrain.zeroGyro()));
         gamepad.selectButton.onTrue(new InstantCommand(() -> RobotContainer.drivetrain.resetModules()));
 
         gamepad.leftTriggerButton.whileTrue(DrivetrainCommands.driveSlowMode(
@@ -46,6 +46,9 @@ public class DriverGamepad extends Gamepad {
 
         gamepad.rightTriggerButton.onTrue(new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kDeployed));
         gamepad.rightTriggerButton.onFalse(new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kStowed));
+
+
+        gamepad.rightBumper.whileTrue(new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kCone));
     }
 
     @Override

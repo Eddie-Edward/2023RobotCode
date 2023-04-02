@@ -29,6 +29,7 @@ import frc.robot.commands.HandoffCone;
 import frc.robot.commands.HandoffCube;
 import frc.robot.commands.ScoreHigh;
 import frc.robot.commands.ScoreMid;
+import frc.robot.commands.ShootHigh;
 import frc.robot.drivetrain.commands.AntiSlip;
 import frc.robot.elevator.ElevatorConfig.ElevatorState;
 import frc.robot.elevator.commands.SetElevatorState;
@@ -52,7 +53,7 @@ public final class AutonMaster {
 
 
             Map.entry("IntakeUp", new ParallelCommandGroup(
-                    new SetPivotState(RobotContainer.intakePivot, PivotState.kStowed),
+                    new SetPivotState(RobotContainer.intakePivot, PivotState.kHumanPlayer),
                     new InstantCommand(() -> RobotContainer.intakeRoller.stop(), RobotContainer.intakeRoller)
             )),
 
@@ -76,6 +77,8 @@ public final class AutonMaster {
                     ClawCommands.setState(ClawState.kOpen)
             )),
 
+            Map.entry("ShootCubeHigh", new ShootHigh()),
+
             Map.entry("Wait2Seconds", new WaitCommand(2)),
 
             Map.entry("HandoffCone", new HandoffCone()),
@@ -90,7 +93,7 @@ public final class AutonMaster {
 
             Map.entry("AntiSlip", new AntiSlip(RobotContainer.drivetrain)),
 
-            Map.entry("ElevatorHigh", new SetElevatorState(RobotContainer.elevator, ElevatorState.kHighGoal)),
+            Map.entry("ElevatorHigh", new ScoreMid()),
 
             Map.entry("ElevatorMid", new SetElevatorState(RobotContainer.elevator, ElevatorState.kMid)),
 
@@ -115,6 +118,7 @@ public final class AutonMaster {
     private enum AutonConstraints {
         kGeneric(4, 3),
         kSlow(3, 2),
+        kCharge(1.5,1.5),
         kCreep(1, 1);
 
         AutonConstraints(double maxVelocity, double maxAcceleration) {
@@ -135,6 +139,11 @@ public final class AutonMaster {
         kClear1_5CubeMidShootBalance(
                 "clear_1.5_mid_cube_shoot_balance",
                 "Clear 1.5 Mid Cube Shoot + Balance",
+                AutonConstraints.kGeneric.get()
+        ),
+        kClear1_5CubeMidShoot(
+                "clear_1.5_mid_cube_shoot",
+                "Clear 1.5 Mid Cube Shoot",
                 AutonConstraints.kGeneric.get()
         ),
         kClear1_5CubeMidBalance(
@@ -172,12 +181,12 @@ public final class AutonMaster {
         kCharge1MidCubeShootBalance(
                 "charge_1_mid_cube_shoot_balance",
                 "Charge 1 Mid Cube Shoot + Balance",
-                AutonConstraints.kSlow.get()
+                AutonConstraints.kCharge.get()
         ),
         kWire1_5CubeShootBalance(
                 "wire_1.5_cube_shoot_balance",
                 "Wire 1.5 Cube Shoot + Balance",
-                AutonConstraints.kSlow.get()
+                AutonConstraints.kCharge.get()
         ),
         kWire1_5CubeShoot(
                 "wire_1.5_cube_shoot",

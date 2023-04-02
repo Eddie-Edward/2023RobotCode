@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.drivetrain.Drivetrain;
 import frc.robot.drivetrain.commands.DrivetrainCommands;
 import frc.robot.elevator.commands.ElevatorCommands;
@@ -19,6 +20,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.autos.AutonMaster;
 import frc.robot.claw.Claw;
+import frc.robot.claw.ClawConfig.ClawState;
+import frc.robot.claw.commands.ClawCommands;
 import frc.robot.elevator.Elevator;
 
 
@@ -83,6 +86,7 @@ public class RobotContainer {
         CommandScheduler.getInstance().getActiveButtonLoop().clear();
         driverGamepad.resetConfig();
         operatorGamepad.resetConfig();
+       // new InstantCommand(() -> RobotContainer.claw.setClawState(ClawState.kOpen), RobotContainer.claw);
     }
 
     private void setDefaultCommands() {

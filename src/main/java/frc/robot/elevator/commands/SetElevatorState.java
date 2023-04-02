@@ -83,9 +83,18 @@ public class SetElevatorState extends CommandBase{
     @Override
     public boolean isFinished() {
         final var limitStates = elevator.getLimitStates();
-        return (limitStates[0] && elevator.getVelocityMps() < 0)
-                || (limitStates[1] && elevator.getVelocityMps() > 0)
-                || (profile != null && profile.isFinished(getElapsedTime()));
+        final var time = getElapsedTime();
+        if (limitStates[0] && profile != null && profile.calculate(time).velocity < 0 && time > 0.25) {
+            System.out.println("[elevator] canceling due to low limit");
+            return true;
+        } 
+
+        if (limitStates[1] && profile != null && profile.calculate(time).velocity > 0 && time > 0.25) {
+            System.out.println("[elevator] canceling due to high limit");
+            return true;
+        }
+
+        return (profile != null && profile.isFinished(time));
     }
 
     private double getElapsedTime() {

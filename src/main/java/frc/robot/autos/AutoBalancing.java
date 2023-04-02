@@ -24,11 +24,10 @@ public class AutoBalancing extends CommandBase {
 
     private final double BALANCE_GOAL = 0;
 
-    private final double BALANCE_kP = 0.05;
+    private final double BALANCE_kP = 0.065;
     private final double BALANCE_kI = 0.0;
     private final double BALANCE_kD = 0.01;
-
-    private final double MAX_OUTPUT = 0.25 * SwerveDrivetrainConstants.MAX_SPEED;
+    private final double MAX_OUTPUT = 0.35 * SwerveDrivetrainConstants.MAX_SPEED;
 
     private double currentAngle, output;
 
@@ -38,6 +37,7 @@ public class AutoBalancing extends CommandBase {
 
     public AutoBalancing(Drivetrain drivetrain) {
         // Use addRequirements() here to declare subsystem dependencies.
+        timer = new Timer();
         mSwerveDrivetrain = drivetrain;
         addRequirements(mSwerveDrivetrain);
 
@@ -85,6 +85,6 @@ public class AutoBalancing extends CommandBase {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return timer.get() > 1.5;
+        return timer.get() > 5;
     }
 }
