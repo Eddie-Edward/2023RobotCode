@@ -18,12 +18,12 @@ a modifier key (a la shift), other buttons / axis can then be mapped to differen
 | DPad Down      | N/A                                        |
 | DPad Left      | N/A                                        |
 | DPad Right     | N/A                                        |
-| Start          | Reset field orientation                    |
+| Start          |                                            |
 | Select         | N/A                                        |
-| Left Bumper    | Virtual gear shift                         |
-| Right Bumper   | Toggle intake position                     |
+| Left Bumper    | Reset field Orientation                    |
+| Right Bumper   | Intake Roll (Cone Profile)                 |
 | Left Trigger   | **SHIFT**                                  |
-| Right Trigger  | Intake                                     |
+| Right Trigger  | Intake Toggle Down and Up                  |
 | Left Joystick  | Drivetrain translation                     |
 | Right Joystick | Drivetrain rotation                        |
 
