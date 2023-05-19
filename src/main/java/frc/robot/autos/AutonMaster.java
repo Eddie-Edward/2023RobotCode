@@ -106,7 +106,7 @@ public final class AutonMaster {
 
     private static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             RobotContainer.drivetrain::getPose,
-            RobotContainer.drivetrain::resetOdometry,
+            RobotContainer.drivetrain::resetOdometry,   
             AutonConstants.AUTO_TRANSLATION_PID,
             AutonConstants.AUTO_ROTATION_PID,
             RobotContainer.drivetrain::setChassisSpeeds,

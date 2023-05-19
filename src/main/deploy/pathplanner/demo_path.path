@@ -2,45 +2,18 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.75,
-        "y": 2.746727339845526
+        "x": 1.0,
+        "y": 3.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.7500000000000027,
-        "y": 2.746727339845526
+        "x": 2.0,
+        "y": 3.0
       },
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
-      "isLocked": true,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [
-          "ShootCubeHigh"
-        ],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 5.75,
-        "y": 2.75
-      },
-      "prevControl": {
-        "x": 4.882987468361389,
-        "y": 2.75
-      },
-      "nextControl": {
-        "x": 4.882987468361389,
-        "y": 2.75
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": true,
-      "velOverride": null,
-      "isLocked": true,
+      "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
@@ -51,23 +24,46 @@
     },
     {
       "anchorPoint": {
-        "x": 4.25,
-        "y": 2.75
+        "x": 3.0328167931656824,
+        "y": 4.7571505128744915
       },
       "prevControl": {
-        "x": 4.764162239419364,
-        "y": 2.75
+        "x": 3.0328167931656824,
+        "y": 3.7571505128744915
+      },
+      "nextControl": {
+        "x": 3.0328167931656824,
+        "y": 3.7571505128744915
+      },
+      "holonomicAngle": 0,
+      "isReversal": true,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 5.0,
+        "y": 3.0
+      },
+      "prevControl": {
+        "x": 4.0,
+        "y": 3.0
       },
       "nextControl": null,
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
-      "isLocked": true,
+      "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [
-          "AutoBalance"
-        ],
+        "names": [],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -76,9 +72,9 @@
   ],
   "markers": [
     {
-      "position": 0.3054545454545157,
+      "position": 1.4690909090908884,
       "names": [
-        "Stop"
+        "IntakeUp"
       ]
     }
   ]

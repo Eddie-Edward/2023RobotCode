@@ -20,7 +20,7 @@ public class ElevatorConfig {
             this.target = target;
         }
     }
-
+    
     // Devices
     public static final int kElevatorSparkID = 51;
     public static final int kUpperLimitSwitchPort = 9;

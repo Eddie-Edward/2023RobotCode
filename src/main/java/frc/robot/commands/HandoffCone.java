@@ -18,7 +18,6 @@ public class HandoffCone extends SequentialCommandGroup {
                 new SetElevatorState(RobotContainer.elevator, ElevatorConfig.ElevatorState.kLoad),
                 new SetPivotState(RobotContainer.intakePivot, IntakeConfig.PivotState.kNeutral)
                         .alongWith(ClawCommands.setState(ClawConfig.ClawState.kOpen)),
-        
                 new InstantCommand(() -> RobotContainer.intakeHood.setState(IntakeConfig.HoodState.kOpen)),
                 new WaitCommand(0.25),
                 new RunIntake(RobotContainer.intakeRoller, RunIntake.Mode.kHandoff).withTimeout(0.75),
