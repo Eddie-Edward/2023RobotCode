@@ -15,7 +15,7 @@ import frc.robot.CrevoLib.math.Conversions;
 
 public class DrivetrainConfig {
     // Physical Constants
-    public static final double kDriveGearRatio = (6.75/1.0);
+    public static final double kDriveGearRatio = (6.12/1.0);
     public static final double kAngleGearRatio = ((-150.0/7)/1.0);
 
     public static final double kDrivetrainWidth = Units.inchesToMeters(20.25);
@@ -75,7 +75,7 @@ public class DrivetrainConfig {
     public static final double kAngleI = 0.0;
     public static final double kAngleD = 0.1;
 
-    public static final double kMaxVelocity = Units.feetToMeters(16);
+    public static final double kMaxVelocity = Units.feetToMeters(18);
     public static final double kMaxAngularVelocity = Math.PI * 4.12 * 0.4;
 
     public static final double kAngleAllowableClosedLoopError = Conversions.degreesToFalcon(3.0, Math.abs(kAngleGearRatio));
